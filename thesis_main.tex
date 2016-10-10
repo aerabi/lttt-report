@@ -1,0 +1,45 @@
+
+% documentclass options:
+% ngerman is needed for hyphenation if the thesis contains parts written in German
+% BCOR is binding correction
+% if you'd rather have a one sided thesis, add `onside' to the documentclass
+\documentclass[11pt, a4paper, BCOR=10mm, english, ngerman]{scrbook}
+
+% include all packages and define commands in setup.tex
+\input{setup}
+
+\begin{document}
+    \pagestyle{empty} % no header and no page number
+    % disable hyper links to remove warning "destination with same identifier"
+    % this means within this section nothing can be referenced with a hyperlink
+    \hypersetup{pageanchor=false}
+    \include{chapters/0_0-titlepage}
+    \pagestyle{plain} % remove chapter name from top, page number at the bottom
+    \frontmatter  % roman page numbers
+    \include{chapters/0_1-declaration}
+    \include{chapters/0_2-abstract}
+    \tableofcontents
+    \listoffigures
+    \listoftables
+    \listofalgorithms
+    \hypersetup{pageanchor=true}  % re-enable hyperlinking
+
+    \mainmatter  % Arabic page numbers
+    \include{chapters/1-introduction}
+    \include{chapters/2-relatedwork}
+    \include{chapters/3-background}
+    \include{chapters/4-approach}
+    \include{chapters/5-experiments}
+    \include{chapters/6-conclusions}
+    \include{chapters/7-acknowledgments}
+
+    % bibliography is not in the table of contents per default, add it manually
+    \addcontentsline{toc}{chapter}{Bibliography}
+    \bibliographystyle{ieeetr}
+    \bibliography{bib/topic1,bib/topic2}
+    \newpage
+    \thispagestyle{empty}
+    \mbox{}
+    
+
+\end{document}

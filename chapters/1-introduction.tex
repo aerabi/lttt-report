@@ -1,0 +1,79 @@
+\chapter{Introduction}\label{chap:introduction}
+This is a template for an undergraduate or master's thesis. The first sections are concerned with the template itself. If this is your first thesis, consider reading \secref{sec:advice}. Of course, the structure of this thesis is only an example. Discuss with your adviser what structure fits best for your thesis.
+
+\section{Template Structure}
+\begin{itemize}
+    \item To compile the document either run the makefile or run your compiler on the file `thesis\_main.tex'. The included makefile requires latexmk which automatically runs bibtex and recompiles your thesis as often as needed. Also it automatically places all output files (aux, bbl, ...) in the folder `out'. As the pdf also goes in there, the makefile copies the pdf file to the parent folder. There is also a makefile in the chapters folder, to ensure you can also compile from this directory.
+
+    \item The file `setup.tex' includes the packages and defines commands. For more details see \secref{sec:setup}.
+
+    \item Each chapter goes into a separate document, the files can be found in the folder chapters.
+
+    \item The bib folder contains the .bib files, I'd suggest to create multiple bib files for different topics. If you add some or rename the existing ones, don't forget to also change this in thesis\_main.tex. You can then cite as usual~\cite{kingma2014adam, bromley1993siamesesignature,muja2009flann}.
+
+    \item The template is written in a way that eases the switch from scrbook to book class. So if you're not a fan of KOMA you can just replace the documentclass in the main file. The only thing that needs to be changed in setup.tex is the caption styling, see the comments there.
+\end{itemize}
+
+
+\section{setup.tex}\label{sec:setup}
+Edit setup.tex according to your needs. The file contains two sections, one for package includes, and one for defining commands. At the end of the includes and commands there is a section that can safely be removed if you don't need algorithms or tikz. Also don't forget to adapt the pdf hypersetup!!\\
+setup.tex defines:
+\begin{itemize}
+    \item some new commands for remembering to do stuff:
+    \begin{itemize}
+        \item \verb|\todo{Do this!}|: \todo{Do this!} 
+        \item \verb|\extend{Write more when new results are out!}|:\\ \extend{Write more when new results are out!} 
+        \item \verb|\draft{Hacky text!}|: \draft{Hacky text!} 
+    \end{itemize}
+
+    \item some commands for referencing, `in \verb|\chapref{chap:introduction}|' produces 'in \chapref{chap:introduction}'
+    \begin{itemize}
+        \item \verb|\chapref{}|
+        \item \verb|\secref{sec:XY}|
+        \item \verb|\eqref{}|
+        \item \verb|\figref{}|
+        \item \verb|\tabref{}|
+    \end{itemize}
+
+    \item the colors of the Uni's corporate design, accessible with\\ \verb|{\color{UniX} Colored Text}|
+    \begin{itemize}
+        \item {\color{UniBlue}UniBlue}
+        \item {\color{UniRed}UniRed}
+        \item {\color{UniGrey}UniGrey}
+    \end{itemize}
+
+    \item a command for naming matrices \verb|\mat{G}|, $\mat{G}$, and naming vectors \verb|\vec{a}|, $\vec{a}$. This overwrites the default behavior of having an arrow over vectors, sticking to the naming conventions  normal font for scalars, bold-lowercase for vectors, and bold-uppercase for matrices.
+
+    \item named equations:
+        \begin{verbatim}
+\begin{align}
+    d(a,b) &= d(b,a)\\ \eqname{symmetry}
+\end{align}
+        \end{verbatim}
+        \begin{align}
+            d(a,b) &= d(b,a)\\ \eqname{symmetry}
+        \end{align}
+\end{itemize}
+
+\section{Advice}\label{sec:advice}
+This section gives some advice how to write a thesis ranging from writing style to formatting. To be sure, ask your advisor about his/her preferences.\\
+For a more complete list we recommend to read Donald Knuth's paper on mathematical writing. (At least the first paragraph). \verb|http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf|
+
+    \begin{itemize}
+        \item Don't use passive voice. It's harder to read, more likely to produce errors, and most of the times less precise. Of course there are situations where the passive voice fits but in scientific papers they are rare. Compare the sentence: `We created the wheel to solve this.' to `The wheel was created to solve this', you don't know who did it, making it harder to understand what is your contribution and what is not.
+        
+        \item If you use formulas pay close attention to be consistent throughout the thesis!
+
+        \item Usually  in a thesis you don't write `In [24] the data is..'. You have more space than a paper has, so write `AuthorXY et al. prepare the data... [24]'. Also pay attention to the placement: The citation is at the end of the sentence before the full stop with a no-break space. \verb|... last word~\cite{XY}.|
+
+        \item Pay attention to comma usage, there is a big difference between English and German. `...the fact that bla...' etc.
+
+        \item Do not write `don't ', `can't' etc. Write `do not', `can not'.
+
+        \item If an equation is at the end of a sentence, add a full stop. If it's not the end, add a comma: {$a= b + c$~~~~(1),}
+
+        \item Avoid footnotes if possible.
+
+        \item Use \verb|``''| for citing, not \verb|""|.
+
+    \end{itemize}
