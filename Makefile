@@ -5,16 +5,22 @@
 
 
 PROJNAME=thesis_main
+OUT_DIR=out
 .PHONY: $(PROJNAME).pdf all clean
 
-all: $(PROJNAME).pdf
+all: dir $(PROJNAME).pdf
+
+dir:
+	mkdir -p $(OUT_DIR)
+	mkdir -p $(OUT_DIR)/chapters
 
 $(PROJNAME).pdf: $(PROJNAME).tex
-	latexmk -outdir=out -pdf -use-make -file-line-error $<
-	cp out/$(PROJNAME).pdf $(PROJNAME).pdf
+	latexmk -outdir=$(OUT_DIR) -pdf -use-make -file-line-error $<
+	cp $(OUT_DIR)/$(PROJNAME).pdf $(PROJNAME).pdf
 
 cleanall:
-	latexmk -outdir=out/ -C
+	rm -rf $(OUT_DIR)/*
 
 clean:
-	latexmk -outdir=out/ -c
+	latexmk -outdir=$(OUT_DIR)/ -c
+
