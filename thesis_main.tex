@@ -13,7 +13,11 @@
     % disable hyper links to remove warning "destination with same identifier"
     % this means within this section nothing can be referenced with a hyperlink
     \hypersetup{pageanchor=false}
-    \include{chapters/0_0-titlepage}
+    
+    % enable/disable, depending on your chosen language
+    \include{chapters/0_0-titlepage_en}
+    \include{chapters/0_0-titlepage_de}
+    
     \pagestyle{plain} % remove chapter name from top, page number at the bottom
     \frontmatter  % roman page numbers
     \include{chapters/0_1-declaration}
@@ -34,7 +38,10 @@
     \include{chapters/7-acknowledgments}
 
     % bibliography is not in the table of contents per default, add it manually
+    % enable the \renewcommand for german header
+    % \renewcommand{\bibname}{Literaturverzeichnis}
     \addcontentsline{toc}{chapter}{Bibliography}
+    
     \bibliographystyle{ieeetr}
     \bibliography{bib/topic1,bib/topic2}
     \newpage
