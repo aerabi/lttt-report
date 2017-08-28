@@ -31,6 +31,9 @@
     \input{chapters/0_0-titlepage_de}
 
     \pagestyle{plain} % remove chapter name from top, page number at the bottom
+    % use \pagestyle{headings} for having the chapter on top of the pages
+    % if you wang a more fancy header use \usepackage[automark,headsepline]{scrlayer-scrpage}
+    % and read about it in the KOMA script documentation, https://www.ctan.org/pkg/koma-script
     \frontmatter  % roman page numbers
     \input{chapters/0_1-declaration}
     \input{chapters/0_2-abstract}

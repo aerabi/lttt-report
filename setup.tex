@@ -14,6 +14,15 @@
     % ------------------- layout, default -------------------
     % adjust the style of float's captions, separated from text to improve readabilty
     \usepackage[labelfont=bf, labelsep=colon, format=hang, textfont=singlespacing]{caption}
+    % With format = hang your caption will look like this:
+    % Figure 1: Lorem ipsum dolor sit amet,
+    %           consectetuer adipiscing elit.
+    %           Ut purus elit, vestibulum
+    % If you instead want
+    % Figure 1: Lorem ipsum dolor sit amet,
+    % consectetuer adipiscing elit. Ut purus
+    % elit, vestibulum
+    % change to format=plain
     \usepackage{chngcntr}  % continuous numbering of figures/tables over chapters
     \counterwithout{equation}{chapter}
     \counterwithout{figure}{chapter}
@@ -55,6 +64,9 @@
     % Improves general appearance of the text
     \usepackage[protrusion=true,expansion=true, kerning]{microtype}
     \usepackage{enumitem}
+
+    % usually you don't need this, just for demonstration of a longer caption
+    \usepackage{lipsum}
 
 %------------------------------------------------------------------------------
 %       (re)new commands / settings
@@ -124,4 +136,6 @@
     % line spacing should be 1.5
     \renewcommand{\baselinestretch}{1.5}
 
+    % set distance between items in a list, for more details see the
+    % enumitem package: https://www.ctan.org/pkg/enumitem
     \setlist{itemsep=.5em}
