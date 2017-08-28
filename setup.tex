@@ -54,6 +54,7 @@
 
     % Improves general appearance of the text
     \usepackage[protrusion=true,expansion=true, kerning]{microtype}
+    \usepackage{enumitem}
 
 %------------------------------------------------------------------------------
 %       (re)new commands / settings
@@ -98,8 +99,8 @@
 
     % ------------------- pdf settings -------------------
     % ADAPT THIS
-    \hypersetup{pdftitle={The great title!},
-                pdfauthor={FirstName LastName},
+    \hypersetup{pdftitle=\thetitle,
+                pdfauthor=\theauthor,
                 pdfsubject={Undergraduate thesis at the Albert Ludwig University of Freiburg},
                 pdfkeywords={deep learning, awesome algorithm,  undergraduate thesis},
                 pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false}
@@ -119,3 +120,8 @@
     % define a foreach command in algorithms
     \algnewcommand\algorithmicforeach{\textbf{foreach}}
     \algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+
+    % line spacing should be 1.5
+    \renewcommand{\baselinestretch}{1.5}
+
+    \setlist{itemsep=.5em}
