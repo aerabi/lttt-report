@@ -4,7 +4,7 @@
 % if you'd rather have a one sided thesis, add `oneside' to the documentclass
 \documentclass[11pt,
   a4paper,
-  parskip=half, % This is some extra vertical space between paragraphs, the suggestion is 2cm which is really ugly, so we use what koma script gives us
+  % parskip=half, % This is some extra vertical space between paragraphs, the suggestion is 2cm which is really ugly, so we use what koma script gives us
   % you can also set it to full for even more space. But there is a bad tex style decision: parskip also changes the spacing between listitems such as
   % enumerate and itemize. For this purpose we include the enumitem package and set itemsep=.5em, of course you can change this
   BCOR=10mm,
@@ -37,27 +37,28 @@
     \frontmatter  % roman page numbers
     \input{chapters/0_1-declaration}
     \input{chapters/0_2-abstract}
+    % acknowledgments are not required. 
+    % \input{chapters/7-acknowledgments}
     \tableofcontents
-    \listoffigures
-    \listoftables
-    \listofalgorithms
+    % \listoffigures
+    % \listoftables
+    % \listofalgorithms
     \hypersetup{pageanchor=true}  % re-enable hyperlinking
 
     \mainmatter  % Arabic page numbers
     \input{chapters/1-introduction}
-    \input{chapters/2-relatedwork}
     \input{chapters/3-background}
     \input{chapters/4-approach}
     \input{chapters/5-experiments}
+    \input{chapters/55-related}
     \input{chapters/6-conclusions}
-    \input{chapters/7-acknowledgments}
 
     % bibliography is not in the table of contents per default, add it manually
     % enable the \renewcommand for german header
     % \renewcommand{\bibname}{Literaturverzeichnis}
     \addcontentsline{toc}{chapter}{Bibliography}
 
-    \bibliographystyle{ieeetr}
+    \bibliographystyle{plainnat}
     \bibliography{bib/topic1,bib/topic2}
     \newpage
     \thispagestyle{empty}

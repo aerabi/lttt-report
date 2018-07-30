@@ -3,27 +3,41 @@ This is a template for an undergraduate or master's thesis.
 The first sections are concerned with the template itself. If this is your first
 thesis, consider reading \secref{sec:advice}.
 
-Of course, the structure of this
-thesis is only an example.
-Discuss with your adviser what structure fits best for your thesis.
+The structure of this document is only an example.
+Discuss with your advisor what structure fits best for your thesis.
 
 \section{Template Structure}
 \begin{itemize}
-    \item To compile the document either run the makefile or run your compiler on the file `thesis\_main.tex'. The included makefile requires latexmk which automatically runs bibtex and recompiles your thesis as often as needed. Also it automatically places all output files (aux, bbl, ...) in the folder `out'. As the pdf also goes in there, the makefile copies the pdf file to the parent folder. There is also a makefile in the chapters folder, to ensure you can also compile from this directory.
+    \item To compile the document either run the \texttt{Makefile} or run your LaTeX compiler on the file `\textrm{thesis\_main.tex}'. The included \texttt{Makefile} requires \texttt{latexmk} which automatically runs \texttt{bibtex} and recompiles your document as often as needed. Moreover, it automatically places all output files (\texttt{aux}, \texttt{bbl}, \dots) in the folder `\texttt{out}'. As the pdf file also goes in there, the \texttt{Makefile} copies the pdf file to the parent folder. There is also a \texttt{Makefile} in the \texttt{chapters} folder, to ensure you can also compile from this directory.
 
-    \item The file `setup.tex' includes the packages and defines commands. For more details see \secref{sec:setup}.
+    \item The file `\texttt{setup.tex}' includes some useful packages and defines commands. For more details see \secref{sec:setup}.
 
-    \item Each chapter goes into a separate document, the files can be found in the folder chapters.
+    \item The source for each chapter is in a separate file the folder \texttt{chapters}.
 
-    \item The bib folder contains the .bib files, I'd suggest to create multiple bib files for different topics. If you add some or rename the existing ones, don't forget to also change this in thesis\_main.tex. You can then cite as usual~\cite{kingma2014adam, bromley1993siamesesignature,muja2009flann}.
+    \item The folder \texttt{bib} contains \texttt{.bib} files that
+      contain entries for the references in a structured form called
+      bibtex entry. For a thesis it is usually sufficient to have a
+      single \texttt{.bib} file, but you might obtain files from your
+      advisor or from the internet. If you add some or rename the
+      existing ones, these changes must be reflected in the argument
+      of the \texttt{bibliography} command in
+      \texttt{thesis\_main.tex}. The \texttt{cite} command refers to
+      bibtex entries by their key~\cite{kingma2014adam,
+        bromley1993siamesesignature,muja2009flann}.
 
-    \item The template is written in a way that eases the switch from scrbook to book class. So if you're not a fan of KOMA you can just replace the documentclass in the main file. The only thing that needs to be changed in setup.tex is the caption styling, see the comments there.
+    \item The template is written in a way that eases the switch from
+      the \texttt{scrbook} to the \texttt{book} class. If you are not
+      a fan of KOMA you can just replace the documentclass in the main
+      file. The only thing that needs to be changed in
+      \texttt{setup.tex} is the caption styling, see the comments
+      there.
 \end{itemize}
 
 
 \section{setup.tex}\label{sec:setup}
-Edit setup.tex according to your needs. The file contains two sections, one for package includes, and one for defining commands. At the end of the includes and commands there is a section that can safely be removed if you don't need algorithms or tikz. Also don't forget to adapt the pdf hypersetup!!\\
-setup.tex defines:
+
+Edit \texttt{setup.tex} according to your needs. The file contains two sections, one for package includes and one for defining commands. At the end of the includes and commands there is a section that can safely be removed if you do not need algorithms or tikz. Do not forget to adapt the pdf hypersetup!!\\
+\texttt{setup.tex} defines:
 \begin{itemize}
     \item some new commands for remembering to do stuff:
     \begin{itemize}
@@ -41,14 +55,14 @@ setup.tex defines:
         \item \verb|\tabref{}|
     \end{itemize}
 
-    \item the colors of the Uni's corporate design, accessible with\\ \verb|{\color{UniX} Colored Text}|
+    \item the colors of the univerty's corporate design, accessible with\\ \verb|{\color{UniX} Colored Text}|
     \begin{itemize}
         \item {\color{UniBlue}UniBlue}
         \item {\color{UniRed}UniRed}
         \item {\color{UniGrey}UniGrey}
     \end{itemize}
 
-    \item a command for naming matrices \verb|\mat{G}|, $\mat{G}$, and naming vectors \verb|\vec{a}|, $\vec{a}$. This overwrites the default behavior of having an arrow over vectors, sticking to the naming conventions  normal font for scalars, bold-lowercase for vectors, and bold-uppercase for matrices.
+    \item a command for naming matrices \verb|\mat{G}|, $\mat{G}$, and naming vectors \verb|\vec{a}|, $\vec{a}$. This command overwrites the default behavior of having an arrow over vectors, sticking to the naming conventions  normal font for scalars, bold-lowercase for vectors, and bold-uppercase for matrices.
 
     \item named equations:
         \begin{verbatim}
@@ -62,6 +76,7 @@ setup.tex defines:
 \end{itemize}
 
 \section{Advice}\label{sec:advice}
+
 This section gives some advice how to write a thesis ranging from writing style to formatting. To be sure, ask your advisor about his/her preferences.\\
 For a more complete list we recommend to read Donald Knuth's paper on mathematical writing. (At least the first paragraph). \url{http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf}
 
@@ -69,25 +84,46 @@ For a more complete list we recommend to read Donald Knuth's paper on mathematic
 
         \item If you use formulae pay close attention to be consistent throughout the thesis!
 
-        \item Usually  in a thesis you don't write `In [24] the data is..'. You have more space than a paper has, so write `AuthorXY et al. prepare the data... [24]'. Also pay attention to the placement: The citation is at the end of the sentence before the full stop with a no-break space. \verb|... last word~\cite{XY}.|
+        \item In a thesis you never write `In [24] the data is..'. You have more space than in a paper, so write `AuthorXY et al. prepare the data... [24]'. The rule is that the text should remain grammatically correct even if the reference is erased.
+          For that reason, the template uses \texttt{natbib} with style \texttt{plainnat}, which makes it much easier to stick to the rule. Most of the time the citation should be at the end of the sentence before the full stop with a no-break space. \verb|... last word~\cite{XY}.| With \texttt{natbib} you can use the \texttt{citet} command to refer to the authors' name and cite at the same time. See \url{https://www.sharelatex.com/learn/Bibliography_management_with_natbib} for more information.
+          
+        \item Get your bibtex entries from \url{https://dblp.org/}.
 
         \item Pay attention to comma usage, there is a big difference between English and German. `...the fact that bla...' etc.
 
-        \item Do not write `don't ', `can't' etc. Write `do not', `can not'.
+        \item Do not write contractions like `don't ', `can't', and so on. Instead write `do not', `cannot', and so on.
 
-        \item If an equation is at the end of a sentence, add a full stop. If it's not the end, add a comma: {$a= b + c$~~~~(1),}
+        \item If an equation is at the end of a sentence, add a full stop. If it is not the end, add a comma: {$a= b + c$~~~~(1),}
 
         \item Avoid footnotes if possible.
 
         \item Use \verb|``''| for citing, not \verb|""|.
+        \item Captions of tables and figures do not end with a period, unless the caption is a full sentence.
+        \item Titles and headings ought to be capitalized properly. Here is a tool to help: \url{https://capitalizemytitle.com/}
 
-        \item It's important to look for spelling mistakes in your thesis. There are also tools like aspell that can help you find such mistakes.
-        This is never an excuse not to properly read your thesis again, but it can help.
+        \item Check the spelling of your thesis before submitting. There are tools like \texttt{aspell} that help you find such mistakes. 
+        As a spell checker cannot find grammatical errors, it does not relieve you from properly reading your thesis again and from getting comments from somebody else.
         You can find an introduction under \url{https://git.fachschaft.tf/fachschaft/aspell}.
 
-        \item If have things like a graph or any other drawings consider using tikz, if you need function graphs or diagrams consider using pgfplots.
-        This has the advantage that the style will be more consistent (same font, formatting options etc.) than when you use some external program.
+      \item If the thesis contains graphs or other drawings consider
+        using \texttt{tikz}. Do not waste you time studying its manual
+        except for the introduction and some examples, instead go for
+        some of the examples available on the net and adapt. For
+        function graphs or diagrams consider using \texttt{pgfplots}
+        or \texttt{gnuplot}.  Using latex-related tools has the
+        advantage that the style is more consistent (same font,
+        formatting options etc.) than with some external program.
 
-        \item Discuss with your advisor whether to use passive voice or not. In most computer science papers passive voice is avoided. It's harder to read, more likely to produce errors, and most of the times less precise. Of course there are situations where the passive voice fits but in scientific papers they are rare. Compare the sentence: `We created the wheel to solve this.' to `The wheel was created to solve this', you don't know who did it, making it harder to understand what is your contribution and what is not.
+      \item Discuss with your advisor whether to use passive voice or
+        not. In most computer science papers passive voice is
+        avoided. It is harder to read, more likely to produce errors,
+        and most of the times less precise. Of course, there are
+        situations where passive voice fits but in scientific papers
+        they are rare. Compare the sentence: `We created the wheel to
+        solve this.' to `The wheel was created to solve this'.  You
+        don't know who did it, making it harder to understand what is
+        your contribution and what is not.
+
+        The thesis should not be written in first person singular. First person plural is generally accepted, but it is good practice to avoid the pronouns `we', `our' etc as much as possible.
 
     \end{itemize}
