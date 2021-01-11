@@ -1,0 +1,70 @@
+\chapter{Generic Store}\label{chap:generic-store}
+
+\newcommand{\angkv}{\langle k, v \rangle}
+\newcommand{\angkvp}{\langle k', v' \rangle}
+
+We are dealing with linear type system, in which exchange is allowed. Hence for convenience, we can add commutativity to the data structure that we use for our stores.
+
+
+\begin{definition}
+The generic stores are denoted by $S$ in this chapter, which are unordered lists of keys $k$ and values $v$, defined inductively as follows:
+\begin{equation*}
+S ::= \emptyset~|~S :: \angkv.
+\end{equation*}
+The empty store is denoted by $\emptyset$ and $::$ is the append operator.
+\end{definition}
+
+\begin{definition}
+Concatenation of two stores are defined as follows:
+
+\begin{equation*}
+S \circ S' =
+\begin{cases}
+    S, & S' = \emptyset, \\
+    (S \circ S'') :: \angkv, & S' = S'' :: \angkv.
+\end{cases}
+\end{equation*}
+\end{definition}
+
+\begin{lemma}[Associativity]
+For stores $S_1, S_2, S_3$, we have $(S_1 \circ S_2) \circ S_3 = S_1 \circ (S_2 \circ S_3)$.
+\end{lemma}
+\begin{proof}
+By induction on $S_2$.
+\end{proof}
+
+\begin{definition}[Membership]
+\label{defn:generic-context-membership}
+By definition, stores are lists of ordered pairs. Membership is defined recursively as follows:
+\begin{itemize}
+    \item If $S = S' :: \angkv$, then $\angkv \in S$,
+    \item If $\angkvp \in S'$ and $k \not= k'$, then $\angkvp \in S :: \angkv$.
+\end{itemize}
+\end{definition}
+
+The membership is defined so, so that appending a pair with the same key and a different value would overwrite the old record, in a sense:
+\begin{itemize}
+    \item $\angkv \in \emptyset :: \angkv$,
+    \item $\angkv \not\in \emptyset :: \angkv :: \ang{k, v'}$.
+\end{itemize}
+
+\begin{definition}
+A key $k$ is said to be a key in the store $S$, denoted as $\ang{k, \cdot} \in S$, iff for some value $v$ we have $\angkv \in S$.
+\end{definition}
+
+\begin{lemma}
+Let $B$ and $C$ be stores, $k$ a key, and $v$ a value. Then:
+\begin{itemize}
+    \item If $\angkv \in C$, then $\angkv \in B \circ C$,
+    \item If $\angkv \in B$ and $\ang{k, \cdot} \not\in C$, then $\angkv \in B \circ C$,
+    \item If $\angkv \in B \circ C$, then either $\angkv \in B$ or $\angkv \in C$.
+\end{itemize}
+\end{lemma}
+
+\begin{definition}[Equivalence]
+We say the store $S$ is a subset of the store $S'$, writing $S \sqsubseteq S'$, iff for all $\angkv \in S$ we have $\angkv \in S'$. We say the two stores are equivalent, writing $S \equiv S'$, when $S \sqsubseteq S'$ and $S' \sqsubseteq S$.
+\end{definition}
+
+\begin{lemma}
+The subset relation $\sqsubseteq$ on the stores is reflexive and transitive. Furthermore, the equivalence relation $\equiv$ is reflexive, transitive, and symmetric.
+\end{lemma}

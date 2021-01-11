@@ -57,6 +57,7 @@
     \usepackage{amsmath}  % |
     \usepackage{amsthm}   % | math, bmatrix etc
     \usepackage{amsfonts} % |
+    \usepackage{amssymb}
     \usepackage{calc}  % calculate within LaTeX
     \usepackage[unicode=true,bookmarks=true,bookmarksnumbered=true,
                 bookmarksopen=true,bookmarksopenlevel=1,breaklinks=false,
@@ -136,6 +137,16 @@
     % ------------------- Tikz styles -------------------
     \tikzset{>=latex}  % arrow style
 
+    % ------------------- Theorems ----------------------
+    \newtheorem{theorem}{Theorem}[chapter]
+    \newtheorem{corollary}{Corollary}[theorem]
+    \newtheorem{lemma}[theorem]{Lemma}
+    
+    \theoremstyle{definition}
+    \newtheorem{definition}[theorem]{Definition}
+    
+    % ------------------- Definitions -------------------
+    \newcommand{\ang}[1]{\left\langle #1 \right\rangle}
 
     % ------------------- algorithm ---------------------
     % Command to align comments in algorithm
