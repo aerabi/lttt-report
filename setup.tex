@@ -58,6 +58,7 @@
     \usepackage{amsthm}   % | math, bmatrix etc
     \usepackage{amsfonts} % |
     \usepackage{amssymb}
+    \usepackage{minted}
     \usepackage{calc}  % calculate within LaTeX
     \usepackage[unicode=true,bookmarks=true,bookmarksnumbered=true,
                 bookmarksopen=true,bookmarksopenlevel=1,breaklinks=false,
@@ -89,6 +90,7 @@
     \renewcommand{\eqref}[1]{Equation~(\ref{#1})}
     \newcommand{\figref}[1]{Figure~\ref{#1}}
     \newcommand{\tabref}[1]{Table~\ref{#1}}
+    \newcommand{\listref}[1]{Listing~\ref{#1}}
 
     % ------------------- colors -------------------
     \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
@@ -157,6 +159,8 @@
 
     % line spacing should be 1.5
     \renewcommand{\baselinestretch}{1.5}
+    % % more paragraph spacing
+    % \setlength{\parskip}{1em}
 
     % set distance between items in a list, for more details see the
     % enumitem package: https://www.ctan.org/pkg/enumitem

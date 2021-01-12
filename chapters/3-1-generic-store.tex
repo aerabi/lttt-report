@@ -3,8 +3,24 @@
 \newcommand{\angkv}{\langle k, v \rangle}
 \newcommand{\angkvp}{\langle k', v' \rangle}
 
-We are dealing with linear type system, in which exchange is allowed. Hence for convenience, we can add commutativity to the data structure that we use for our stores.
+Typing environments lie at the core of the type inference relations, storing what variables have which types at the moment. The rule
+\[
+\Gamma :: \ang{x, T} \vdash x : T
+\]
+is a good example: A variable $x$ is typed to $T$, if it was declared to be of type $T$, hence stored in the typing environment.
 
+When implementing type systems in Coq, choosing a right data model for the typing environments is very important, as it will play a big role is the proofs about the typing rules. Therefore, different attempts were made to create general data models for typing environments.
+
+Among his libraries for the locally nameless infrastructure, Arthur \cite{DBLP:journals/jar/Chargueraud12} built a generic model for environments, and later Emmanuel \cite{DBLP:journals/corr/abs-1112-1316} rewrote his generic environments model in Coq 8.3, publishing it as a standalone Coq library\footnote{\url{https://github.com/coq-community/generic-environments}}.
+
+\todo{Add details about problems of these libraries}
+
+
+Current chapter focuses on the new implementation of the typing environments in Coq.
+
+\section{A New Implementation}
+
+As the data model can hold any type of data, and not only typing information, we call it \textit{generic store} or simply \textit{store}, when merely talking about the abstract data structure.
 
 \begin{definition}
 The generic stores are denoted by $S$ in this chapter, which are unordered lists of keys $k$ and values $v$, defined inductively as follows:
@@ -13,6 +29,41 @@ S ::= \emptyset~|~S :: \angkv.
 \end{equation*}
 The empty store is denoted by $\emptyset$ and $::$ is the append operator.
 \end{definition}
+
+We would need decidablity of equality on the keys and values of the store. So, we assume the keys are chosen from a class $\mathbf{K}$ equipped with a reflexive relation $\asymp$ with the following property:
+\begin{itemize}
+    \item If $k_1 \asymp k_2$, then $k_1 = k_2$.
+\end{itemize}
+The axiom of extentionality is not required for the class of values, $\mathbf{V}$. See \listref{listing:kvmoduletype} for implementation details.
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos
+]{coq}
+Module Type KeyModuleType.
+
+  Parameter T : Type.
+  Parameter equal : T -> T -> bool.
+  Parameter eq_refl : forall x, equal x x = true.
+  Parameter eq_extensionality : forall x y, equal x y = true -> x = y.
+
+End KeyModuleType.
+
+Module Type ValModuleType.
+
+  Parameter T : Type.
+  Parameter equal : T -> T -> bool.
+  Parameter eq_refl : forall x, equal x x = true.
+
+End ValModuleType.
+\end{minted}
+\caption{Definition of the classes $\mathbf{K}$ and $\mathbf{V}$ in Coq}
+\label{listing:kvmoduletype}
+\end{listing}
 
 \begin{definition}
 Concatenation of two stores are defined as follows:
