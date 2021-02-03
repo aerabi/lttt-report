@@ -1,0 +1,29 @@
+\begin{gather*}
+\infer[\mbox{Var}]{\Gamma, x: \T \vdash x : \T}{}
+~~~~ ~~~~
+\infer[\mathtt{Unit}\mbox{-I}]{\Gamma \vdash () : \mathtt{Unit}}{}
+~~~~ ~~~~
+\infer[\mathtt{Void}\mbox{-E}]{\Gamma \vdash \mathtt{case}~\t~\mathtt{of}~() : \mathfrak{S}}{\Gamma \vdash \t : \mathtt{Void}}
+\\ \\ 
+\infer[\times\mbox{-I}]{\Gamma \vdash (\t_1, \t_2) : \T_1 \times \T_2}{\Gamma \vdash \t_1 : \T_1 & \Gamma \vdash \t_2 : \T_2}
+~~~~ ~~~~
+\infer[\times\mbox{-E}]{\Gamma \vdash \pi_i \t : \T_i}{\Gamma \vdash \t : \T_1 \times \T_2}
+\\ \\ 
+\infer[+\mbox{-I}]{\Gamma \vdash \mathtt{in}_i \t : \T_1 + \T_2}{\Gamma \vdash \t : \T_i}
+~~~~ ~~~~
+\infer[+\mbox{-E}]{\Gamma \vdash \mathtt{case}~\t~\mathtt{of}~(\mathtt{in}_1 x_1 \rightarrow \t_1 \mid \mathtt{in}_2 x_2 \rightarrow \t_2) : \mathfrak{S}}{
+    \Gamma \vdash \t : \T_1 + \T_2
+    &
+    \Gamma, x_1 : \T_1 \vdash \t_1 : \mathfrak{S}
+    &
+    \Gamma, x_2 : \T_2 \vdash \t_2 : \mathfrak{S}
+}
+\\ \\
+\infer[\rightarrow\mbox{-I}]{\Gamma \vdash \lambda x. \t : \T \rightarrow \mathfrak{S}}{\Gamma, x : \T \vdash \t : \mathfrak{S}}
+~~~~ ~~~~
+\infer[\rightarrow\mbox{-E}]{\Gamma \vdash \t_1\t_2 : \mathfrak{S}}{
+    \Gamma \vdash \t_1 : \T \rightarrow \mathfrak{S}
+    &
+    \Gamma \vdash \t_2 : \T
+}
+\end{gather*}
