@@ -1,0 +1,11 @@
+\begin{align*}
+    \T ::=&~ \mathtt{Unit} \mid \mathtt{Void} \mid \T \times \T \mid \T + \T \mid \T \rightarrow \T \mid \ceil{\A} \\
+    \A ::=&~ 1 \mid 0 \mid \A \otimes \A \mid \A \otimes \A \mid \A \multimap \A \mid \diamond\A \mid \floor{\T} \\
+    \\
+    \t ::=&~ x \mid () \mid \mathtt{case}~\t~\mathtt{of}~() \mid (\t_1, \t_2) \mid \pi_i \t \mid \mathtt{in}_i \t \mid \mathtt{case}~\t~\mathtt{of}~(\mathtt{in}_1 x_1 \rightarrow \t_1 \mid \mathtt{in}_2 x_2 \rightarrow \t_2) \\
+    & \mid \lambda x. \t \mid \t_1 \t_2 \mid \mathtt{suspend}~\e \\
+    \e ::=&~ x \mid () \mid \mathtt{case}~\e~\mathtt{of}~() \mid (\e_1, \e_2) \mid \mathtt{in}_i \e \mid \mathtt{case}~\t~\mathtt{of}~(\mathtt{in}_1 x_1 \rightarrow \e_1 \mid \mathtt{in}_2 x_2 \rightarrow \e_2) \\
+    & \mid \lambda x. \e \mid \e_1 \e_2 \mid \mathtt{force}~\t \mid \mathtt{return}~\e \mid \mathtt{bind}~x = \e_1~\mathtt{in}~\e_2 \mid \floor{\t} \\
+    &\mid \mathtt{let}~() = \e_1~\mathtt{in}~\e_2 \mid \mathtt{let}~(x_1, x_2) = \e_1~\mathtt{in}~\e_2 \mid \mathtt{let}~\floor{x} = \e_1~\mathtt{in}~\e_2
+\end{align*}
+
