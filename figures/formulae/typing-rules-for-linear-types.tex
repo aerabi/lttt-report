@@ -10,7 +10,7 @@
 \infer[\times\mbox{-E}]{\Gamma \vdash \pi_i \t : \T_i}{\Gamma \vdash \t : \T_1 \times \T_2}
 \\ \\ 
 \infer[+\mbox{-I}]{\Gamma \vdash \mathtt{in}_i \t : \T_1 + \T_2}{\Gamma \vdash \t : \T_i}
-~~~~ ~~~~
+\\ \\
 \infer[+\mbox{-E}]{\Gamma \vdash \mathtt{case}~\t~\mathtt{of}~(\mathtt{in}_1 x_1 \rightarrow \t_1 \mid \mathtt{in}_2 x_2 \rightarrow \t_2) : \mathfrak{S}}{
     \Gamma \vdash \t : \T_1 + \T_2
     &
