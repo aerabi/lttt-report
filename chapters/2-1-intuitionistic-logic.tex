@@ -1,0 +1,28 @@
+\section{Intuitionistic Logic}
+
+The \textit{intuitionistic logic} is known to differ from the classical logic by rejecting the \textit{law of excluded middle} (Latin: \textit{principium tertii exclusi}, aka \textit{tertium non datur}). As a result, the two following classical tautologies are not valid in the intuitionistic logic: $p \vee \neg p$ (\textit{tertium non datur}) and $\neg \neg p \rightarrow p$ (double-negation elimination).
+
+\subsection{Language of Propositional Intuitionistic Logic}
+
+The language of propositional intuitionistic logic is defined with the following grammar:
+\[
+\alpha ::= \bot \mid x \mid \alpha \rightarrow \alpha \mid \alpha \vee \alpha \mid \alpha \wedge \alpha.
+\]
+Here $\bot$ is constant (falsity or contradiction), $x$ ranges over the propositional variables, and the connectives are: implication $\rightarrow$, disjunction $\vee$, and conjunction $\wedge$. Negation $\neg \alpha$ is defined by $\neg \alpha = \alpha \rightarrow \bot$.
+
+\subsection{Sequent and Natural Deduction}
+
+A \textit{context} is a set of $\alpha$'s, usually denoted by $\Gamma$. We write $\Gamma, \Delta$ for $\Gamma \cup \Delta$, and also $\Gamma, \alpha$ for $\Gamma \cup \{\alpha\}$. 
+
+\begin{definition}[Sequent]
+The relation $\Gamma \vdash \alpha$ is defined syntactically by Figure \ref{fig:intuitionistic-logic-natural-deduction}, but can be though of as ``$\alpha$ holds if all $\Gamma$ holds''. The relation $\vdash$ is called \textit{sequent}, the elements of $\Gamma$ are called \textit{antecedents}, and $\alpha$ is called \textit{succedents} or \textit{consequents}. When $\Gamma = \emptyset$, we write $\vdash \alpha$, and say that $\alpha$ is a \textit{theorem}.
+\end{definition}
+
+\begin{figure}
+    \centering
+    \include{figures/formulae/intuitionistic-logic-natural-deduction}
+    \caption{Natural deduction rules of the propositional intuitionistic logic}
+    \label{fig:intuitionistic-logic-natural-deduction}
+\end{figure}
+
+The proof system which consists of the sequent relation together with the deduction rules, is called \textit{natural deduction}.

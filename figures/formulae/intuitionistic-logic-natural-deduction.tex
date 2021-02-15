@@ -1,0 +1,29 @@
+\begin{gather*}
+\infer[\mbox{Var}]{\Gamma, \alpha \vdash \alpha}{}
+~~~~ ~~~~
+\infer[\bot\mbox{-E}]{\Gamma \vdash \beta}{\Gamma \vdash \bot}
+\\ \\ 
+\infer[\wedge\mbox{-I}]{\Gamma \vdash \alpha_1 \wedge \alpha_2}{
+    \Gamma \vdash \alpha_1
+    &
+    \Gamma \vdash \alpha_2
+}
+~~~~ ~~~~
+\infer[\wedge\mbox{-E}]{\Gamma \vdash \alpha_i}{
+    \Gamma \vdash \alpha_1 \wedge \alpha_2
+}
+\\ \\ 
+\infer[\vee\mbox{-I}]{\Gamma\vdash \alpha_1 \vee \alpha_2}{\Gamma \vdash \alpha_i}
+~~~~ ~~~~
+\infer[\vee\mbox{-E}]{\Gamma \vdash \beta}{
+    \Gamma \vdash \alpha_1 \vee \alpha_2
+    &
+    \Gamma, \alpha_1 \vdash \beta
+    &
+    \Gamma, \alpha_2 \vdash \beta
+}
+\\ \\ 
+\infer[\rightarrow\mbox{-I}]{\Gamma \vdash \alpha \rightarrow \beta}{\Gamma, \alpha \vdash \beta}
+~~~~ ~~~~
+\infer[\rightarrow\mbox{-E}]{\Gamma \vdash \beta}{\Gamma \vdash \alpha & \Gamma \vdash \alpha \rightarrow \beta}
+\end{gather*}
