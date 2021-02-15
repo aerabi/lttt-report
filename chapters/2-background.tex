@@ -1,1 +1,17 @@
 \chapter{Background}\label{chap:background}
+
+Propositional logic is about judgments of the form ``$\alpha$ holds``. In contrast, a type system is about judgments of the form ``$\t$ is of type $\T$''. Although the judgments are different, to derive them one should employ similar techniques. A good example is depicted in Table \ref{tab:natural-deduction-lambda-calculus-correspondence}.
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{c|c}
+        Intuitionistic Logic & Lambda Calculus \\
+        \hline \\
+        $\infer[\mbox{Ax}]{\Gamma_1, \alpha, \Gamma_2 \vdash \alpha}{}$ & $\infer[]{\Gamma_1, x : \alpha, \Gamma_2 \vdash x : \alpha}{}$ \\ \\
+        $\infer[\rightarrow\mbox{-I}]{\Gamma \vdash \alpha \rightarrow \beta}{\Gamma, \alpha \vdash \beta}$ & $\infer[\rightarrow\mbox{-I}]{\Gamma \vdash \lambda x. t : \alpha \rightarrow \beta}{\Gamma, x : \alpha \vdash t : \beta}$ \\ \\
+        $\infer[\rightarrow\mbox{-E}]{\Gamma \vdash \beta}{\Gamma \vdash \alpha & \Gamma \vdash \alpha \rightarrow \beta}$ & $\infer[\rightarrow\mbox{-E}]{\Gamma \vdash f x : \beta}{\Gamma \vdash x : \alpha & \Gamma \vdash f : \alpha \rightarrow \beta}$
+    \end{tabular}
+    \caption{Correspondence between 
+intuitionistic implicational natural deduction and lambda calculus type assignment rules}
+    \label{tab:natural-deduction-lambda-calculus-correspondence}
+\end{table}
