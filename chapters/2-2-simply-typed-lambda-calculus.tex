@@ -1,0 +1,23 @@
+\section{Simply Typed Lambda Calculus}
+
+The language of simply typed lambda calculus $\lambda(\rightarrow)$ is defined by the following grammar:
+\begin{align*}
+    &\T ::= T \mid \T \rightarrow \T \\
+    &\t ::= x \mid \lambda x. \t \mid \t_1 \t_2
+\end{align*}
+Here, $T$ designates constant types (take $\mathtt{Boolean} \mid \mathtt{String}$ for example) and $x$ designates variables. The $\t$'s are called \textit{terms} and the $\T$'s are called \textit{types}.
+
+\subsection{Sequent and Natural Deduction}
+
+A \textit{context} here is a set of ordered pairs $\ang{\t, \T}$, usually denoted by $\Gamma$. We additionally assume that there are no duplicate keys, making contexts \textit{functions} (in the set-theoretic sense). The set of keys in $\Gamma$ is denoted by $\iota_1[\Gamma]$ and the values $\iota_2[\Gamma]$. When $\iota_1[\Gamma] \cap \iota_1[\Delta] = \emptyset$, we write $\Gamma, \Delta$ for $\Gamma \cup \Delta$. We also write $\Gamma, \t: \T$ for $\Gamma, \{\ang{\t, \T}\}$.
+
+\begin{definition}
+The relation $\Gamma \vdash \t : \T$ for $\lambda(\rightarrow)$ is defined syntactically by \figref{fig:simply-typed-lambda-calculus-natural-deduction}.
+\end{definition}
+
+\begin{figure}
+    \centering
+    \include{figures/formulae/simply-typed-lambda-calculus-natural-deduction}
+    \caption{Natural deduction rules of the simply typed lambda calculus}
+    \label{fig:simply-typed-lambda-calculus-natural-deduction}
+\end{figure}

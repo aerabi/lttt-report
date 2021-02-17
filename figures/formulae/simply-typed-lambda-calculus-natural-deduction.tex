@@ -1,0 +1,11 @@
+\begin{gather*}
+\infer[\mbox{Var}]{\Gamma, x : \T \vdash x : \T}{}
+\\ \\ 
+\infer[\rightarrow\mbox{-I}]{\Gamma \vdash \lambda x. \t : \T \rightarrow \mathfrak{S}}{\Gamma, x : \T \vdash \t : \mathfrak{S}}
+~~~~ ~~~~
+\infer[\rightarrow\mbox{-E}]{\Gamma \vdash \t_1\t_2 : \mathfrak{S}}{
+    \Gamma \vdash \t_1 : \T \rightarrow \mathfrak{S}
+    &
+    \Gamma \vdash \t_2 : \T
+}
+\end{gather*}
