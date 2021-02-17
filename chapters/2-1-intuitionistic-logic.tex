@@ -4,7 +4,7 @@ The \textit{intuitionistic logic} is known to differ from the classical logic by
 
 \subsection{Language of Propositional Intuitionistic Logic}
 
-The language of propositional intuitionistic logic is defined with the following grammar:
+The language of intuitionistic propositional logic, IPC (C for calculus) or IPC$(\bot, \rightarrow, \vee, \wedge)$, is defined with the following grammar:
 \[
 \alpha ::= \bot \mid x \mid \alpha \rightarrow \alpha \mid \alpha \vee \alpha \mid \alpha \wedge \alpha.
 \]
@@ -26,3 +26,5 @@ The relation $\Gamma \vdash \alpha$ is defined syntactically by Figure \ref{fig:
 \end{figure}
 
 The proof system which consists of the sequent relation together with the deduction rules, is called \textit{natural deduction}.
+
+The subset of IPC that only deals with $\alpha ::= x \mid \alpha \rightarrow \alpha$, with three rules of Ax, $\rightarrow$-I, and -E, is called IPC$(\rightarrow)$.

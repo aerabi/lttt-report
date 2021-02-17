@@ -1,0 +1,11 @@
+\section{Curry--Howard Correspondence}
+
+The following theorem, states the Curry--Howard correspondence between implicational fragment of intuitionistic propositional logic IPC$(\rightarrow)$ and the simply typed lambda calculus $\lambda(\rightarrow)$.
+
+\begin{theorem}
+The types in $\lambda(\rightarrow)$ separately accept an \emph{IPC}$(\rightarrow)$. Furthermore:
+\begin{itemize}
+    \item If $\Gamma \vdash \t : \alpha$, then $\iota_2[\Gamma] \vdash \alpha$.
+    \item If $\Delta \vdash \alpha$, then there is a $\Gamma$ and a $\t$, such that $\Delta = \iota_2[\Gamma]$ and $\Gamma \vdash \t : \alpha$.
+\end{itemize}
+\end{theorem}
