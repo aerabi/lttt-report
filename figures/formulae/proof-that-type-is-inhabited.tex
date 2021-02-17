@@ -1,0 +1,22 @@
+\begin{equation*}
+\infer{\vdash \lambda a. \lambda b. \lambda c. a (b c) : (\beta \rightarrow \alpha) \rightarrow (\gamma \rightarrow \beta) \rightarrow \gamma \rightarrow \alpha}{
+%
+\infer{a : \beta \rightarrow \alpha \vdash \lambda b. \lambda c. a (b c) : (\gamma \rightarrow \beta) \rightarrow \gamma \rightarrow \alpha}{
+%
+\infer{a : \beta \rightarrow \alpha, b : \gamma \rightarrow \beta \vdash \lambda c. a (b c) : \gamma \rightarrow \alpha}{
+%
+\infer{a : \beta \rightarrow \alpha, b : \gamma \rightarrow \beta, c : \gamma \vdash a (b c) : \alpha}{
+%
+\infer{\Gamma \vdash a : \beta \rightarrow \alpha}{}
+&
+\infer{\Gamma \vdash b c : \beta}{
+%
+\infer{\Gamma \vdash b : \gamma \rightarrow \beta}{}
+&
+\infer{\Gamma \vdash c : \gamma}{}
+}
+}
+}
+}
+}
+\end{equation*}

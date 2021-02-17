@@ -9,3 +9,18 @@ The types in $\lambda(\rightarrow)$ separately accept an \emph{IPC}$(\rightarrow
     \item If $\Delta \vdash \alpha$, then there is a $\Gamma$ and a $\t$, such that $\Delta = \iota_2[\Gamma]$ and $\Gamma \vdash \t : \alpha$.
 \end{itemize}
 \end{theorem}
+
+An interesting case is when $\Gamma = \emptyset$.
+
+\begin{corollary}
+A formula $\varphi$ in \emph{IPC}$(\rightarrow)$ is a true theorem, iff it's inhabited by a $\lambda(\rightarrow)$-term $\t$, that is $\vdash \t : \varphi$.
+\end{corollary}
+
+An example is the formula $(\beta \rightarrow \alpha) \rightarrow (\gamma \rightarrow \beta) \rightarrow \gamma \rightarrow \alpha$. Only the fact that the $\lambda(\rightarrow)$-term $\lambda a. \lambda b. \lambda c. a (b c)$ inhabits this type, proves it. \figref{fig:curry-howard-example} demonstrate a proof of it by natural deduction. For neatness, we named $\Gamma := a : \beta \rightarrow \alpha, b : \gamma \rightarrow \beta, c : \gamma$.
+
+\begin{figure}
+    \centering
+    \input{figures/formulae/proof-that-type-is-inhabited}
+    \caption{Proof by natural deduction that $\vdash \lambda a. \lambda b. \lambda c. a (b c) : (\beta \rightarrow \alpha) \rightarrow (\gamma \rightarrow \beta) \rightarrow \gamma \rightarrow \alpha$}
+    \label{fig:curry-howard-example}
+\end{figure}
