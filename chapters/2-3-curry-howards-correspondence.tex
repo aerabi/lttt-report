@@ -13,6 +13,7 @@ The types in $\lambda(\rightarrow)$ separately accept an \emph{IPC}$(\rightarrow
 An interesting case is when $\Gamma = \emptyset$.
 
 \begin{corollary}
+\label{corollary:theorem-if-inhabited}
 A formula $\varphi$ in \emph{IPC}$(\rightarrow)$ is a true theorem, iff it's inhabited by a $\lambda(\rightarrow)$-term $\t$, that is $\vdash \t : \varphi$.
 \end{corollary}
 
@@ -25,4 +26,4 @@ An example is the formula $(\beta \rightarrow \alpha) \rightarrow (\gamma \right
     \label{fig:curry-howard-example}
 \end{figure}
 
-\subsection{}
+An interesting case of Corollary \ref{corollary:theorem-if-inhabited} is $\varphi = \bot$. If any term of the language inhabits the contradiction, then the underlying logic on the types is inconsistent.
