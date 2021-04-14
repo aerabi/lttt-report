@@ -1,0 +1,26 @@
+\section{A Taste of Linear Logic}
+
+Linear type systems correspond to or are inspired by the linear logic of \cite{DBLP:journals/tcs/Girard87}. In ordinary logic, we think of $\psi \vdash \varphi$ as ``$\varphi$ is true whenever $\psi$ is'', and when the truth of something is proven, it is true for the eternity. That is not the case with the linear logic. Members of the logic are not facts about the nature, rather resources that are consumed.
+
+A good example is the following. In ordinary logic (take intuitionistic for example), one can prove
+\[
+\alpha \rightarrow \beta, \alpha \rightarrow \gamma, \alpha \vdash \beta \wedge \gamma.
+\]
+But this is not the case for the linear logic:
+\[
+\alpha \multimap \beta, \alpha \multimap \gamma, \alpha \not\vdash \beta \otimes \gamma.
+\]
+Once the hypothesis $\alpha$ is used to derive $\beta$, it's not available any more. We need another $\alpha$ to derive $\gamma$:
+\[
+\alpha \multimap \beta, \alpha \multimap \gamma, \alpha, \alpha \vdash \beta \otimes \gamma.
+\]
+
+As \cite{DBLP:conf/mfcs/Wadler93} puts it: ``Traditional logic encourages reckless use of resources. Contraction profligately duplicates assumptions, Weakening foolishly discards assumptions. This makes sense for logic, where truth is free; and it makes sense for some programming languages, where copying a value is as cheap as copying a pointer. But it is not always sensible.''
+
+The language of linear logic, LL$(0, \multimap, \oplus, \otimes, !)$ or simply LL, is defined with the following grammar:
+\[
+\alpha ::= 0 \mid x \mid \alpha \multimap \alpha \mid \alpha \oplus \alpha \mid \alpha \otimes \alpha \mid~ !\alpha.
+\]
+Here $0$ is a constant and the linear version of $\bot$, the modality $!$ is called \textit{of course} or \textit{bang} and is similar to the modal $\square$, the connective $\multimap$ is called \textit{lollipop} which is the bilinear version of implication, $\oplus$ is called \textit{additive disjunction} is the bilinear version of or, and $\otimes$ is called \textit{multiplicative conjunction} or \textit{tensor} is the bilinear version of and.
+
+The linear logic of \cite{DBLP:journals/tcs/Girard87} is more extensive and has a richer inventory of connectives and modalities. An honorable mention is the modality $?$, that is called \textit{why not} or \textit{par}, and is the DeMorgan dual of $!$. As you have already guessed, $?$ is the linear version of $\diamond$.

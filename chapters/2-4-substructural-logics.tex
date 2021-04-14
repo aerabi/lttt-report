@@ -6,25 +6,25 @@ Three common structural rules are:
 \begin{itemize}
     \item \textbf{Weakening}. Which states that hypotheses of a sequent could be extended.
     \begin{gather*}
-        \infer[\mbox{Weak}]{\Gamma_1, \alpha, \Gamma_2 \vdash \beta}{\Gamma_1, \Gamma_2 \vdash \beta}
+        \infer=[\mbox{Weak}]{\Gamma_1, \alpha, \Gamma_2 \vdash \beta}{\Gamma_1, \Gamma_2 \vdash \beta}
         ~~~~ ~~~~
-        \infer[\mbox{Weak}]{\Gamma_1, x : \A, \Gamma_2\vdash \t : \mathfrak{B}}{\Gamma_1, \Gamma_2\vdash \t : \mathfrak{B}}
+        \infer=[\mbox{Weak}]{\Gamma_1, x : \A, \Gamma_2\vdash \t : \mathfrak{B}}{\Gamma_1, \Gamma_2\vdash \t : \mathfrak{B}}
     \end{gather*}
     \item \textbf{Contraction}. Which states that two similar (or unifiable) hypothesis can be replaced by a single hypothesis.
     \begin{gather*}
-        \infer[\mbox{Contr}]{\Gamma_1, \alpha, \Gamma_2 \vdash \beta}{\Gamma_1, \alpha, \alpha, \Gamma_2 \vdash \beta}
+        \infer=[\mbox{Contr}]{\Gamma_1, \alpha, \Gamma_2 \vdash \beta}{\Gamma_1, \alpha, \alpha, \Gamma_2 \vdash \beta}
         ~~~~ ~~~~
-        \infer[\mbox{Contr}]{\Gamma_1, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}{\Gamma_1, x : \A, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
+        \infer=[\mbox{Contr}]{\Gamma_1, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}{\Gamma_1, x : \A, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
     Another version of the weakening rule is proposed by \cite{DavidWalker2004} for type systems:
     \begin{gather*}
-        \infer[\mbox{Contr}]{\Gamma_1, x_1 : \A, \Gamma_2 \vdash \t[x_2 \mapsto x_1, x_3 \mapsto x_1] : \mathfrak{B}}{\Gamma_1, x_2 : \A, x_3 : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
+        \infer=[\mbox{Contr}]{\Gamma_1, x_1 : \A, \Gamma_2 \vdash \t[x_2 \mapsto x_1, x_3 \mapsto x_1] : \mathfrak{B}}{\Gamma_1, x_2 : \A, x_3 : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
     \item \textbf{Exchange}. Which states that two hypotheses may be swapped.
     \begin{gather*}
-        \infer[\mbox{Exch}]{\Gamma_1, \alpha_2, \alpha_1, \Gamma_2 \vdash \beta}{\Gamma_1, \alpha_1, \alpha_2, \Gamma_2 \vdash \beta}
+        \infer=[\mbox{Exch}]{\Gamma_1, \alpha_2, \alpha_1, \Gamma_2 \vdash \beta}{\Gamma_1, \alpha_1, \alpha_2, \Gamma_2 \vdash \beta}
         ~~~~ ~~~~
-        \infer[\mbox{Exch}]{\Gamma_1, x_2 : \A_2, x_1 : \A_1 \Gamma_2 \vdash \t : \mathfrak{B}}{\Gamma_1, x_1 : \A_1, x_2 : \A_2, \Gamma_2 \vdash \t : \mathfrak{B}}
+        \infer=[\mbox{Exch}]{\Gamma_1, x_2 : \A_2, x_1 : \A_1 \Gamma_2 \vdash \t : \mathfrak{B}}{\Gamma_1, x_1 : \A_1, x_2 : \A_2, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
 \end{itemize}
 
