@@ -113,11 +113,7 @@ with <$\A$>_eq ( A1 : <$\A$> ) ( A2 : <$\A$> ) : bool :=
 
 The Coq types $\T$ and $\A$ that represent non-linear and linear types of the language, implemented based on \figref{fig:syntax-of-types-terms-expressions}. The listing is presented in Listings \ref{listing:coq-linear-nonlinear-types}.
 
-% \item $\t$ and $\e$ that represent terms and expressions, based on \figref{fig:syntax-of-types-terms-expressions}.
-
 Two fixpoint functions $\T$\texttt{\_eq} and $\A$\texttt{\_eq} are also implemented to check equality among $\T$ and $\A$ types. The definitions of these two functions are also presented in Listing \ref{listing:coq-T_eq-and-A_eq}. These two functions are essentials for membership check in the store. To verify their soundness, the following lemma is created:
-
-% \item Modules \texttt{DeclarativeTyping}$\T$, \texttt{DeclarativeTyping}$\A$, and \texttt{DeclarativeTyping}$\T\A$, that implement the Figures \ref{fig:typing-rules-for-nonlinear-types}, \ref{fig:typing-rules-for-linear-types}, and \ref{fig:typing-rules-for-linear-and-nonlinear-types}, respectively.
 
 % \item An inductive relation $\t$\texttt{sem} that implements operational semantics on terms.
 

@@ -1,0 +1,50 @@
+\section{Declarative Typing}
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos,
+escapeinside=<>,
+mathescape=true
+]{coq}
+Module DeclarativeTyping<$\T$>.
+
+Reserved Notation "G '⊢' t '|' T" (at level 60).
+
+Inductive type : <$\mathfrak{G}$> -> <$\mathfrak{t}$> -> <$\T$> -> Prop :=
+  | Var : forall <$\Gamma$> x T, (m<$\mathfrak{G}$>.append <$\Gamma$> x T) <$\vdash$> (<$\mathfrak{t}$>id x) | T
+  | Unit_I : forall <$\Gamma$>, <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>hole | Unit
+  | Void_E : forall <$\Gamma$> t T, <$\Gamma$> <$\vdash$> t | Void -> <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>holecase t | T
+  | <$\T$>mult_I : forall <$\Gamma$> t1 t2 T1 T2, <$\Gamma$> <$\vdash$> t1 | T1 -> <$\Gamma$> <$\vdash$> t2 | T2 -> 
+    <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>pair t1 t2 | <$\T$>mult T1 T2
+  | <$\T$>mult_E1 : forall <$\Gamma$> t T1 T2, <$\Gamma$> <$\vdash$> t | <$\T$>mult T1 T2 -> <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>prj 1 t | T1
+  | <$\T$>mult_E2 : forall <$\Gamma$> t T1 T2, <$\Gamma$> <$\vdash$> t | <$\T$>mult T1 T2 -> <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>prj 2 t | T2
+  | <$\T$>plus_I1 : forall <$\Gamma$> t T1 T2, <$\Gamma$> <$\vdash$> t | T1 -> <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>inj 1 t | <$\T$>plus T1 T2
+  | <$\T$>plus_I2 : forall <$\Gamma$> t T1 T2, <$\Gamma$> <$\vdash$> t | T2 -> <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>inj 2 t | <$\T$>plus T1 T2
+  | <$\T$>plus_E : forall <$\Gamma$> t t1 t2 x1 x2 T1 T2 S, <$\Gamma$> <$\vdash$> t | <$\T$>plus T1 T2 ->
+    (m<$\mathfrak{G}$>.append <$\Gamma$> x1 T1) <$\vdash$> t1 | S -> (m<$\mathfrak{G}$>.append <$\Gamma$> x2 T2) <$\vdash$> t2 | S -> 
+    <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>case t x1 t1 x2 t2 | S
+  | <$\T$>impl_I : forall <$\Gamma$> t x T S, (m<$\mathfrak{G}$>.append <$\Gamma$> x T) <$\vdash$> t | S -> 
+    <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>lambda x t | <$\T$>impl T S
+  | <$\T$>impl_E : forall <$\Gamma$> t1 t2 T S, <$\Gamma$> <$\vdash$> t1 | <$\T$>impl T S -> <$\Gamma$> <$\vdash$> t2 | T -> 
+    <$\Gamma$> <$\vdash$> <$\mathfrak{t}$>app t1 t2 | S
+where "G '⊢' t '|' T" := (type G t T).
+
+End DeclarativeTyping<$\T$>.
+\end{minted}
+\caption{Implementation of non-linear typing rules}
+\label{listing:coq-declarativetypingT}
+\end{listing}
+
+In this section, we are going to describe declarative typing of the type system implemented in Coq.
+%
+Coq types $\t$ and $\e$ represent terms and expressions, based on \figref{fig:syntax-of-types-terms-expressions}.
+Also,
+\begin{itemize}
+    \item \texttt{DeclarativeTyping}$\T$ is the implementation of typing rules for terms, based on \figref{fig:typing-rules-for-nonlinear-types} and represented in Listing \ref{listing:coq-declarativetypingT},
+    \item \texttt{DeclarativeTyping}$\A$ is the implementation of typing rules for expressions, based on \figref{fig:typing-rules-for-linear-types},
+    \item \texttt{DeclarativeTyping}$\T\A$ is the implementation of typing rules featuring lift and lower, to move between non-linear and linear types, based on \figref{fig:typing-rules-for-linear-and-nonlinear-types}.
+\end{itemize}
