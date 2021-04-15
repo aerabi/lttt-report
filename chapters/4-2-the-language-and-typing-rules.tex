@@ -1,0 +1,212 @@
+\section{Types and Their Reflexivity}
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos,
+escapeinside=<>,
+mathescape=true
+]{coq}
+Inductive <$\T$> : Type :=
+  | Unit : <$\T$>
+  | Void : <$\T$>
+  | <$\T$>mult : <$\T$> -> <$\T$> -> <$\T$>
+  | <$\T$>plus : <$\T$> -> <$\T$> -> <$\T$>
+  | <$\T$>impl : <$\T$> -> <$\T$> -> <$\T$>
+  | <$\T$>ceil : <$\A$> -> <$\T$>
+with <$\A$> : Type :=
+  | <$\A$>1 : <$\A$>
+  | <$\A$>0 : <$\A$>
+  | <$\A$>mult : <$\A$> -> <$\A$> -> <$\A$>
+  | <$\A$>plus : <$\A$> -> <$\A$> -> <$\A$>
+  | <$\A$>impl : <$\A$> -> <$\A$> -> <$\A$>
+  | <$\A$>flor : <$\A$> -> <$\A$>
+  | <$\A$>diam : <$\A$> -> <$\A$>.
+\end{minted}
+\caption{Inductive definition of non-linear and linear types in Coq}
+\label{listing:coq-linear-nonlinear-types}
+\end{listing}
+
+% \begin{listing}[t]
+% \begin{minted}[
+% frame=lines,
+% framesep=2mm,
+% baselinestretch=1.2,
+% fontsize=\footnotesize,
+% linenos,
+% escapeinside=<>,
+% mathescape=true
+% ]{coq}
+% Inductive <$\mathfrak{x}$> : Type :=
+%   | <$\mathfrak{x}$>id : nat -> <$\mathfrak{x}$>.
+
+% Inductive <$\t$> : Type :=
+%   | <$\t$>id : <$\mathfrak{x}$> -> <$\t$>
+%   | <$\t$>hole : <$\t$>
+%   | <$\t$>holecase : <$\t$> -> <$\t$>
+%   | <$\t$>pair : <$\t$> -> <$\t$> -> <$\t$>
+%   | <$\t$>prj : nat -> <$\t$> -> <$\t$>
+%   | <$\t$>inj : nat -> <$\t$> -> <$\t$>
+%   | <$\t$>case : <$\t$> -> <$\mathfrak{x}$> -> <$\t$> -> <$\mathfrak{x}$> -> <$\t$> -> <$\t$>
+%   | <$\t$>lambda : <$\mathfrak{x}$> -> <$\t$> -> <$\t$>
+%   | <$\t$>app : <$\t$> -> <$\t$> -> <$\t$>
+%   | <$\t$>suspend : <$\mathfrak{e}$> -> <$\t$>
+% with <$\mathfrak{e}$> : Type :=
+%   | <$\mathfrak{e}$>id : <$\mathfrak{x}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>hole : <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>holecase : <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>holelet : <$\mathfrak{e}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>pair : <$\mathfrak{e}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>let : <$\mathfrak{x}$> -> <$\mathfrak{x}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>inj : nat -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>case : <$\mathfrak{e}$> -> <$\mathfrak{x}$> -> <$\mathfrak{e}$> -> <$\mathfrak{x}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>lambda : <$\mathfrak{x}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>app : <$\mathfrak{e}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>return : <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>bind : <$\mathfrak{x}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>force : <$\t$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>flor : <$\t$> -> <$\mathfrak{e}$>
+%   | <$\mathfrak{e}$>florlet : <$\mathfrak{x}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$> -> <$\mathfrak{e}$>.
+% \end{minted}
+% \caption{Inductive definition of terms and expressions types in Coq}
+% \label{listing:coq-linear-nonlinear-terms}
+% \end{listing}
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos,
+escapeinside=<>,
+mathescape=true
+]{coq}
+Fixpoint <$\T$>_eq ( T1 : <$\T$> ) ( T2 : <$\T$> ) : bool :=
+  match T1, T2 with
+  | Unit, Unit => true
+  | Void, Void => true
+  | <$\T$>mult T1' T1'', <$\T$>mult T2' T2'' => andb (<$\T$>_eq T1' T2') (<$\T$>_eq T1'' T2'')
+  | <$\T$>plus T1' T1'', <$\T$>plus T2' T2'' => andb (<$\T$>_eq T1' T2') (<$\T$>_eq T1'' T2'')
+  | <$\T$>impl T1' T1'', <$\T$>impl T2' T2'' => andb (<$\T$>_eq T1' T2') (<$\T$>_eq T1'' T2'')
+  | <$\T$>ceil T1', <$\T$>ceil T2' => <$\A$>_eq T1' T2'
+  | _, _ => false
+  end
+with <$\A$>_eq ( A1 : <$\A$> ) ( A2 : <$\A$> ) : bool :=
+  match A1, A2 with
+  | <$\A$>0, <$\A$>0 => true
+  | <$\A$>1, <$\A$>1 => true
+  | <$\A$>mult A1' A1'', <$\A$>mult A2' A2'' => andb (<$\A$>_eq A1' A2') (<$\A$>_eq A1'' A2'')
+  | <$\A$>plus A1' A1'', <$\A$>plus A2' A2'' => andb (<$\A$>_eq A1' A2') (<$\A$>_eq A1'' A2'')
+  | <$\A$>impl A1' A1'', <$\A$>impl A2' A2'' => andb (<$\A$>_eq A1' A2') (<$\A$>_eq A1'' A2'')
+  | <$\A$>flor A1', <$\A$>flor A2' => <$\T$>_eq A1' A2'
+  | <$\A$>diam A1', <$\A$>diam A2' => <$\A$>_eq A1' A2'
+  | _, _ => false
+  end.
+\end{minted}
+\caption{Implementation of equality relation for non-linear and linear types in Coq}
+\label{listing:coq-T_eq-and-A_eq}
+\end{listing}
+
+The Coq types $\T$ and $\A$ that represent non-linear and linear types of the language, implemented based on \figref{fig:syntax-of-types-terms-expressions}. The listing is presented in Listings \ref{listing:coq-linear-nonlinear-types}.
+
+% \item $\t$ and $\e$ that represent terms and expressions, based on \figref{fig:syntax-of-types-terms-expressions}.
+
+Two fixpoint functions $\T$\texttt{\_eq} and $\A$\texttt{\_eq} are also implemented to check equality among $\T$ and $\A$ types. The definitions of these two functions are also presented in Listing \ref{listing:coq-T_eq-and-A_eq}. These two functions are essentials for membership check in the store. To verify their soundness, the following lemma is created:
+
+% \item Modules \texttt{DeclarativeTyping}$\T$, \texttt{DeclarativeTyping}$\A$, and \texttt{DeclarativeTyping}$\T\A$, that implement the Figures \ref{fig:typing-rules-for-nonlinear-types}, \ref{fig:typing-rules-for-linear-types}, and \ref{fig:typing-rules-for-linear-and-nonlinear-types}, respectively.
+
+% \item An inductive relation $\t$\texttt{sem} that implements operational semantics on terms.
+
+\begin{lemma}
+\label{lemma:T_eq_refl}
+Both relations \emph{$\T$\texttt{\_eq}} and \emph{$\A$\texttt{\_eq}} are reflexive.
+\end{lemma}
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Lemma <$\T\A$>_eq_refl :
+(forall T, <$\T$>_eq T T = true) /\ (forall A, <$\A$>_eq A A = true).
+\end{minted}
+
+To prove the lemma, a combined induction scheme is required:
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Scheme <$\T$>_ind := Induction for <$\T$> Sort Prop
+with   <$\A$>_ind := Induction for <$\A$> Sort Prop.
+
+Combined Scheme <$\T\A$>_ind from <$\T$>_ind, <$\A$>_ind.
+\end{minted}
+
+With the combined scheme, the proof of Lemma \ref{lemma:T_eq_refl} is straightforward:
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Proof.
+  apply <$\T\A$>_ind; simpl; auto; intros;
+  try rewrite -> andb_true_iff; try split; auto.
+Qed.
+\end{minted}
+
+And hence we get two corollaries:
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Corollary <$\T$>_eq_refl : forall T, <$\T$>_eq T T = true.
+Proof. apply <$\T\A$>_eq_refl. Qed.
+
+Corollary <$\A$>_eq_refl : forall A, <$\A$>_eq A A = true.
+Proof. apply <$\T\A$>_eq_refl. Qed.
+\end{minted}
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos,
+escapeinside=||,
+mathescape=true
+]{coq}
+Module module|$\T$| <: ValModuleType.
+
+  Definition T := |$\T$|.
+  Definition equal : T -> T -> bool := |$\T$|_eq.
+
+  Definition eq_refl : forall t, equal t t = true.
+  Proof.
+    intros. apply |$\T$|_eq_refl.
+  Qed.
+
+End module|$\T$|.
+
+Module module|$\A$| <: ValModuleType.
+
+  Definition T := |$\A$|.
+  Definition equal : T -> T -> bool := |$\A$|_eq.
+
+  Definition eq_refl : forall t, equal t t = true.
+  Proof.
+    intros. apply |$\A$|_eq_refl.
+  Qed.
+
+End module|$\A$|.
+\end{minted}
+\caption{Implementation of non-linear and linear as value module type, to be used in the store as value types}
+\label{listing:coq-moduleT-and-moduleA}
+\end{listing}
+
+To use the types $\T$ and $\A$ as the value types of the store, modules \texttt{module}$\T$ and \texttt{module}$\A$ are created, inheriting from \texttt{ValModuleType} (see Listing \ref{listing:coq-moduleT-and-moduleA}).
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Module m<$\mathfrak{G}$> := ListCtx.ListCtx moduleId module<$\T$>.
+Module m<$\mathfrak{D}$> := ListCtx.ListCtx moduleId module<$\A$>.
+\end{minted}
+
+The modules \texttt{m}$\mathfrak{G}$ and \texttt{m}$\mathfrak{D}$ hold the contexts $\Gamma$ and $\Delta$, respectively, named $\mathfrak{G}$ and $\mathfrak{D}$ in the Coq code.
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Definition <$\mathfrak{G}$> : Type := m<$\mathfrak{G}$>.T.
+Definition <$\mathfrak{D}$> : Type := m<$\mathfrak{D}$>.T.
+\end{minted}

@@ -1,3 +1,13 @@
 \chapter{Coq Implementation}\label{chap:coq-implementation}
 
+In this chapter we describe the Coq implementation\footnote{\url{https://github.com/aerabi/lttt}} of the type system introduced in Chapter \ref{chapter:the-type-system}. It has multiple parts that we discuss in the following sections:
+\begin{itemize}
+    \item A generic key-value store to be used as the typing context.
+    \item Implementation of the language types $\T$ and $\A$.
+    \item Implementation of terms and expressions, $\t$ and $\e$, respectively.
+    \item Declarative typing.
+    \item Operational semantics.
+\end{itemize}
+
 \input{chapters/4-1-typing-context}
+\input{chapters/4-2-the-language-and-typing-rules}
