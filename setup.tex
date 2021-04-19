@@ -47,7 +47,7 @@
     % \setkomafont{chapter}{\normalfont\bfseries\huge}
 
     \usepackage{setspace}  % Line spacing
-    \onehalfspacing
+    % \onehalfspacing
     % \doublespacing  % uncomment for double spacing, e.g. for annotations in correction
 
     % ------------------- functional, default-------------------
@@ -142,12 +142,19 @@
     \tikzset{>=latex}  % arrow style
 
     % ------------------- Theorems ----------------------
+    \newcommand{\lqed}{\hfill\hbox{$\lozenge$}}
+    
     \newtheorem{theorem}{Theorem}[chapter]
     \newtheorem{corollary}{Corollary}[theorem]
     \newtheorem{lemma}[theorem]{Lemma}
     
     \theoremstyle{definition}
-    \newtheorem{definition}[theorem]{Definition}
+    \newtheorem{definitionX}[theorem]{Definition}
+    
+    \newenvironment{definition} %
+        {\renewcommand{\qedsymbol}{$\lozenge$}%
+        \pushQED{\qed}\begin{definitionX}}
+        {\popQED\end{definitionX}}
     
     % ------------------- Definitions -------------------
     \newcommand{\ang}[1]{\left\langle #1 \right\rangle}
