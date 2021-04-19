@@ -1,0 +1,57 @@
+\section{Linear Types of \texttt{Lin} and \texttt{Single}}
+
+The key ingredients of the embedded linear type system are the following:
+\begin{itemize}
+    \item A class \texttt{Lin<}$\T$\texttt{>} that is basically the $\floor{\T}$,
+    \item A class \texttt{Single<}$\A$\texttt{>} that is basically the $\diamond\A$.
+\end{itemize}
+
+One can create a linear variable from a non-linear value by calling on the constructor of \texttt{Lin}:
+
+\begin{minted}{typescript}
+const lin: Lin<number> = new Lin(12);
+\end{minted}
+
+And to read the value later, one needs to call on the class method \texttt{read}:
+
+\begin{minted}{typescript}
+console.log(lin.read());
+\end{minted}
+
+The \texttt{read} method cannot be called more than once; it will through an error on the second attempt. And code linters such as TSLint and ESLint can guard against the variable not being used.
+
+The types \texttt{LUnit} and \texttt{LZero} are special cases of the type \texttt{Lin}:
+
+\begin{minted}{typescript}
+export type LUnit = Lin<undefined>;
+export type LZero = Lin<void>;
+\end{minted}
+
+The \texttt{Single} type wraps a linear value that is not necessarily available immediately. One can create a single from a value or a \texttt{Promise}:
+
+\begin{minted}{typescript}
+const single1 = Single.fromLinearValue(lin);
+const single2 = Single.fromValue(12);
+const single3 = Single.fromPromise(Promise.resolve(12));
+\end{minted}
+
+The values are wrapped into a linear variable under the hood, so all of the 3 introduced variables (\texttt{single1} and \texttt{single2} and \texttt{single3}) are equal.
+
+There is a \texttt{bind} method that will read the value of the eventual linear variable and pass it to the callback function:
+
+\begin{minted}{typescript}
+const single = Single.fromValue(12);
+single.bind(x => expect(x).toEqual(12));
+\end{minted}
+
+And, in contrast to \texttt{Observable}s and \texttt{Promise}s, a \texttt{Single} cannot be bound twice:
+
+\begin{minted}{typescript}
+single.bind(x => ...);  // first time, OK
+single.bind(x => ...);  // second time, error
+\end{minted}
+
+Having these in mind, one can describe the language of the embedded linear types as follows:
+\[
+\A ::= \mathtt{LUnit} \mid \mathtt{LZero} \mid \mathtt{[}\A, \A\mathtt{]} \mid \A\mbox{~\texttt{=>}~} \A \mid \mbox{\texttt{Lin<}}\T\mbox{\texttt{>}} \mid \mbox{\texttt{Single<}}\A\mbox{\texttt{>}}.
+\]
