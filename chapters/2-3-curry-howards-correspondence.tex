@@ -3,7 +3,7 @@
 The following theorem, states the Curry--Howard correspondence between implicational fragment of intuitionistic propositional logic IPC$(\rightarrow)$ and the simply typed lambda calculus $\lambda(\rightarrow)$.
 
 \begin{theorem}
-The types in $\lambda(\rightarrow)$ separately accept an \emph{IPC}$(\rightarrow)$. Furthermore:
+The types in $\lambda(\rightarrow)$ form an \emph{IPC}$(\rightarrow)$. Furthermore:
 \begin{itemize}
     \item If $\Gamma \vdash \t : \alpha$, then $\iota_2[\Gamma] \vdash \alpha$.
     \item If $\Delta \vdash \alpha$, then there is a $\Gamma$ and a $\t$, such that $\Delta = \iota_2[\Gamma]$ and $\Gamma \vdash \t : \alpha$.
@@ -26,4 +26,4 @@ An example is the formula $(\beta \rightarrow \alpha) \rightarrow (\gamma \right
     \label{fig:curry-howard-example}
 \end{figure}
 
-An interesting case of Corollary \ref{corollary:theorem-if-inhabited} is $\varphi = \bot$. If any term of the language inhabits the contradiction, then the underlying logic on the types is inconsistent.
+A case of Corollary \ref{corollary:theorem-if-inhabited} is $\varphi = \bot$. If any term of the language inhabits the contradiction, then the underlying logic on the types is inconsistent.
