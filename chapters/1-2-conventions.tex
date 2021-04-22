@@ -1,10 +1,13 @@
 \section{Conventions}
 
-Prior familiarity with logic and type systems is helpful but not required. For more background in type systems, we refer the reader to the book of \cite{10.5555/1076265} and especially its first chapter by \cite{DavidWalker2004}.
+Prior familiarity with logic and type systems is helpful but not required. \chapref{chap:background} tries to define everything required to understand the LTTT's formulation later given in \chapref{chapter:the-type-system}. For more background in type systems, we refer the reader to the book of \cite{10.5555/1076265} and especially its first chapter by \cite{DavidWalker2004}. For more background in the theoretical part, work of \cite{DBLP:journals/tcs/Girard87} on linear logic is suggested.
 
-Throughout the thesis, small Greek letters are used as metavariables in the logics: $\alpha, \beta, \varphi, \psi$. In the type systems, Fraktur letters are used instead: small letters for terms and expressions in the language being typed, e.g. $\t, \e$, and capital letters for the types: $\mathfrak{A}, \mathfrak{B}, \T$. One reason for this separation is because some small Greek letters are used in the toy languages: $\lambda$ for the lambda expression, $\iota$ for injection, and $\pi$ for projection. Furthermore, most capital Greek letters are indistinguishable from their Latin descendants, e.g. $A, B, T$.
+Throughout the thesis, small Greek letters are used as metavariables in the logics: $\alpha, \beta, \varphi, \psi$. In the type systems, Fraktur letters are used instead: small letters for terms and expressions in the language being typed, e.g. $\t, \e$, and capital letters for the types: $\mathfrak{A}, \mathfrak{B}, \T$. One reason for this separation is because some small Greek letters are used in the toy languages: $\lambda$ for the lambda expression, $\iota$ for injection, and $\pi$ for projection. Furthermore, most capital Greek letters are indistinguishable from their Latin descendants, e.g. $A, B, T$. The use of Fraktur letters for logical expressions is inspired by \cite{hilbert1928}.
+In \chapref{chap:coq-implementation}, the Fraktur letters represent types in the metalanguage (in this case Coq):
 
-In \chapref{chap:coq-implementation}, the Fraktur letters represent types in the metalanguage (in this case Coq).
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Inductive type : <$\mathfrak{G}$> -> <$\mathfrak{t}$> -> <$\T$> -> Prop := ...
+\end{minted}
 
 \begin{table}[t]
     \centering
@@ -20,3 +23,7 @@ In \chapref{chap:coq-implementation}, the Fraktur letters represent types in the
     \caption{Different typefaces and their meanings}
     \label{tab:fonts}
 \end{table}
+
+Here \texttt{type} is the typing relation represented as a sequent in \chapref{chapter:the-type-system}: $\Gamma \vdash \t : \T$.
+
+\chapref{chap:coq-implementation} discusses a Coq implementation of the theory, so familiarity with syntax of Coq is helpful. Similarly, familiarity with syntax of TypeScript is helpful for \chapref{chap:typescript-implementation}.
