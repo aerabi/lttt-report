@@ -1,0 +1,23 @@
+\section{The \texttt{Promise} Type}
+
+The \texttt{Promise} type is probably the most natural embodiment of $\diamond\A$. A promise basically exposes a \texttt{next} API, which is identical to the \texttt{bind} operator in our toy language. This whole binding business is very linear:
+
+\begin{minted}{typescript}
+const record: Promise<Record> = ...
+record.next(r => f(r));
+\end{minted}
+
+After the record is resolved, it is passed into a callback function \texttt{f} exactly once. It may be duplicated or discarded inside \texttt{f}, but that's another story.
+
+But, there are aspects of promises that make them less linear:
+\begin{itemize}
+    \item The promises are eager rather than lazy. This results in computations that may be discarded.
+    \item A promise, when calculated, is persisted and can be used many times:
+    
+\begin{minted}{typescript}
+record.next(r => f(r));  // first binding, OK
+record.next(r => g(r));  // second binding, also OK
+\end{minted}
+\end{itemize}
+
+Although the method chaining interface is linear, the underlying data structure is not.

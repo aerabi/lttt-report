@@ -1,0 +1,27 @@
+\section{The \texttt{Observable} Type}
+
+With introduction of Rx, the way we coded was changed forever. Nowadays, we wrap all of the logic in the code, in chains of callbacks called transformations. The main type in the Rx implementations is called \texttt{Observable}, named after the observable pattern, although it has many fundamental differences.
+
+The observables wrap a stream of events, rather than just one, but they contain only one event most of the times. This is why RxJava has created multiple observable types depending on the number of events they contains:
+\begin{itemize}
+    \item \texttt{Single}. Contains one event.
+    \item \texttt{Maybe}. Contains zero or one events.
+    \item \texttt{Completable}. Is used to model computations that do not emit any values.
+\end{itemize}
+
+These types are not present in RxJS implementation, yet, but one can enforce an observable there to have exactly one element:
+
+\begin{minted}{typescript}
+const record$: Observable<Record> = ...
+record$.pipe(single());  // fails if != 1 item is emitted
+\end{minted}
+
+An observable that emits exactly one element, is a closer resemblance of the type $\diamond\A$:
+
+\begin{itemize}
+    \item As the observables are lazy, the variables are not computed if not used. So, one cannot discard them.
+    \item By subscribing twice to an observable, the whole pipeline of computation is replayed from the very beginning. This is very similar to linear logic's duplicate entries in the context:
+    \[
+    \alpha \multimap \beta, \alpha \multimap \gamma, \alpha, \alpha \vdash \beta \otimes \gamma.
+    \]
+\end{itemize}
