@@ -48,3 +48,33 @@ Also,
     \item \texttt{DeclarativeTyping}$\A$ is the implementation of typing rules for expressions, based on \figref{fig:typing-rules-for-linear-types},
     \item \texttt{DeclarativeTyping}$\T\A$ is the implementation of typing rules featuring lift and lower, to move between non-linear and linear types, based on \figref{fig:typing-rules-for-linear-and-nonlinear-types}.
 \end{itemize}
+
+The first obvious result of the implementation follows:
+
+\begin{lemma}
+If $\ang{x, \T} \in \Gamma$, then $\Gamma \vdash x : \T$.
+\end{lemma}
+\begin{proof}
+By induction on the definition of membership (Definition \ref{defn:generic-context-membership}), either one of the following statements are true:
+\begin{itemize}
+    \item $\Gamma = \Gamma' :: \ang{x, \T}$, in which case the statement follows from the \texttt{Var} rule of \listref{listing:coq-declarativetypingT}.
+    \item $\Gamma = \Gamma' :: \ang{x', \T'}$ and $\ang{x, \T} \in \Gamma'$ and $x \not= x'$. In this case, by induction we have $\Gamma' \vdash x : \T$, which means $\Gamma' = \Gamma'' :: \ang{x, \T}$. Using the append commute lemma (\lemref{lemma:append_commut}), we have
+    \[
+    \Gamma = \Gamma'' :: \ang{x, \T} :: \ang{x', \T'} = \Gamma'' :: \ang{x', \T'} :: \ang{x, \T},
+    \]
+    and so $\Gamma \vdash x : \T$ follows once more from \texttt{Var}. \qedhere
+\end{itemize}
+\end{proof}
+
+The Coq implementation of this lemma is much less verbose:
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Lemma contains_<$\T$>_var : forall <$\Gamma$> x T,
+  m<$\mathfrak{G}$>.contains <$\Gamma$> x T -> <$\Gamma$> <$\vdash$> <$\t$>id x | T.
+Proof.
+  intros. induction H.
+  - subst s. apply T<$\T$>.Var.
+  - inversion IHcontains. rewrite -> m<$\mathfrak{G}$>.append_commut_weak.
+    apply T<$\T$>.Var. auto.
+Qed.
+\end{minted}

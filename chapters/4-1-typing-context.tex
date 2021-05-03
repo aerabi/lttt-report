@@ -24,7 +24,7 @@ We would need decidablity of equality on the keys and values of the store. So, w
 \begin{itemize}
     \item If $k_1 \asymp k_2$, then $k_1 = k_2$.
 \end{itemize}
-The axiom of extentionality is not required for the class of values, $\mathbf{V}$.
+The axiom of extentionality is also required for the class of values, $\mathbf{V}$.
 
 % \begin{listing}[t]
 % \begin{minted}[
@@ -79,7 +79,7 @@ By induction on $S_2$.
 By definition, stores are lists of ordered pairs. Membership is defined recursively as follows:
 \begin{itemize}
     \item If $S = S' :: \angkv$, then $\angkv \in S$,
-    \item If $\angkvp \in S'$ and $k \not= k'$, then $\angkvp \in S :: \angkv$.
+    \item If $\angkvp \in S'$ and $k \not= k'$, then $\angkvp \in S :: \angkv$. \qedhere
 \end{itemize}
 \end{definition}
 
@@ -111,14 +111,31 @@ The subset relation $\sqsubseteq$ on the stores is reflexive and transitive. Fur
 \end{lemma}
 
 \begin{definition}[Normality]
-We say a store $S$ is duplicated, if it has duplicated keys, recursively defined as follows:
+We say a store $S$ is \textit{duplicated}, if it has duplicated keys, recursively defined as follows:
 \begin{itemize}
     \item If $S = S' :: \angkv$ and $\ang{k, \cdot} \in S'$, then $S$ is duplicated,
     \item If $S = S' :: \angkv$ and $S'$ is duplicated, so is $S$.
 \end{itemize}
-If $S$ is not duplicated, we say it's normal.
+If $S$ is not duplicated, we call it \textit{unique-paired}.
 \end{definition}
 
-\begin{theorem}
-Let $B$ and $C$ be stores. If $B \circ C$ is normal, then $B \circ C \equiv C \circ B$.
+\begin{theorem}[Commute]
+Let $B$ and $C$ be stores. If $B \circ C$ is unique-paired, then $B \circ C \equiv C \circ B$.
 \end{theorem}
+
+\begin{corollary}[Exchange]
+\label{corollary:exchange}
+For stores $A, B, C, D$, if $B \circ C$ is unique-paired, then $A \circ B \circ C \circ D = A \circ C \circ B \circ D$.
+\end{corollary}
+
+Corollary \ref{corollary:exchange} shows that the store we implemented can only be used with type systems that support the structural rule of exchange (hence, all except ordered ones).
+
+\begin{lemma}[Append Commute]
+\label{lemma:append_commut}
+For any store $S$, keys $k, k'$, and values $v, v'$, if $k \not= k'$, then $S :: \ang{k, v} :: \ang{k', v'} = S :: \ang{k', v'} :: \ang{k, v}$.
+\end{lemma}
+\begin{proof}
+By writing $S :: \ang{k, v} :: \ang{k', v'}$ as $S \circ (\emptyset :: \ang{k, v}) \circ (\emptyset :: \ang{k', v'})$, realizing that $(\emptyset :: \ang{k, v}) \circ (\emptyset :: \ang{k', v'})$ is unique-paired, and then using Corollary \ref{corollary:exchange} (exchange).
+\end{proof}
+
+There are many more lemmas and propositions stated and proved in the Coq implementation. One can find them in \texttt{ListCtx.v}.

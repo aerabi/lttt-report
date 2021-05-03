@@ -1,13 +1,24 @@
-\section{Linear Types of \texttt{Lin} and \texttt{Single}}
+\section{Embedding Linear Types in TypeScript}
 
-Embedding linear type systems in non-linear host languages was studied by \cite{JenniferPaykin2018}. In this chapter we describe the implementation of the type system presented in Chapter \ref{chapter:the-type-system} in TypeScript as the host language.
-
-The key ingredients of the embedded linear type system are the following:
+The \texttt{Observable} type of RxJS is already a very good model to study linear events, but it is too complicated. We need a more limited and controlled version of an \texttt{Observable}. In particular, we need our new monadic type to satisfy the following criteria:
 \begin{itemize}
-    \item A class \texttt{Lin<}$\T$\texttt{>} that is basically the $\floor{\T}$,
-    \item A class \texttt{Single<}$\A$\texttt{>} that is basically the $\diamond\A$.
+    \item Wrap exactly one event (just like \texttt{Promise} or \texttt{Single} of RxJava).
+    \item Expose one binding interface (similar to \texttt{Promise}'s \texttt{next}), rather than dozens like in \texttt{Observable}.
+    \item Be linear (unlike \texttt{Promise} that can be used indefinitely).
 \end{itemize}
 
+% Embedding linear type systems in non-linear host languages was studied by \cite{JenniferPaykin2018}. In this chapter we describe the implementation of the type system presented in Chapter \ref{chapter:the-type-system} in TypeScript as the host language.
+
+The key ingredients to create such a type system are the following:
+\begin{itemize}
+    \item A class \texttt{Lin<}$\T$\texttt{>} that implements $\floor{\T}$, to create an embedded linear type system into TypeScript, that lacks it.
+    \item A class that implements $\diamond\A$, based on a \texttt{Lin}.
+\end{itemize}
+
+The explanations that follow are based on the TypeScript implementation of \texttt{Lin}, \texttt{LPromise}, and \texttt{Single}\footnote{\url{https://github.com/aerabi/lttt-typescript}}.
+
+\section{Linear Type of \texttt{Lin}}
+Type \texttt{Lin} is implemented as a TypeScript class.
 One can create a linear variable from a non-linear value by calling on the constructor of \texttt{Lin}:
 
 \begin{minted}{typescript}
@@ -29,31 +40,52 @@ export type LUnit = Lin<undefined>;
 export type LZero = Lin<void>;
 \end{minted}
 
-The \texttt{Single} type wraps a linear value that is not necessarily available immediately. One can create a single from a value or a \texttt{Promise}:
+\section{Eager Type of \texttt{LPromise}}
+
+As presented in \chapref{chapter:the-type-system}, the modal $\diamond$ exists in the linear fragment of the logic. In our setting, we need to use \texttt{Lin} to convert an unrestricted type into a linear one, and then apply the modality on it.
+
+This section explains the type \texttt{LPromise<}$\T$\texttt{>}, which is an implementation of $\diamond\floor{\T}$ (so the generic unrestricted type is converted into a linear type under the hood):
 
 \begin{minted}{typescript}
-const single1 = Single.fromLinearValue(lin);
-const single2 = Single.fromValue(12);
-const single3 = Single.fromPromise(Promise.resolve(12));
+let lpromise: LPromise<string>;
 \end{minted}
 
-The values are wrapped into a linear variable under the hood, so all of the 3 introduced variables (\texttt{single1} and \texttt{single2} and \texttt{single3}) are equal.
+The \texttt{LPromise} type wraps a linear value that is not necessarily available immediately. One can create a single from a value or a \texttt{Promise}:
+
+\begin{minted}{typescript}
+const lp1 = LPromise.fromLinearValue(lin);
+const lp2 = LPromise.fromValue(12);
+const lp3 = LPromise.fromPromise(Promise.resolve(12));
+\end{minted}
+
+The values are wrapped into a linear variable under the hood, so all of the 3 introduced variables (\texttt{lp1} and \texttt{lp2} and \texttt{lp3}) are equal.
 
 There is a \texttt{bind} method that will read the value of the eventual linear variable and pass it to the callback function:
 
 \begin{minted}{typescript}
-const single = Single.fromValue(12);
-single.bind(x => expect(x).toEqual(12));
+const lpromise = LPromise.fromValue(12);
+lpromise.bind(x => expect(x).toEqual(12));
 \end{minted}
 
 And, in contrast to \texttt{Observable}s and \texttt{Promise}s, a \texttt{Single} cannot be bound twice:
 
 \begin{minted}{typescript}
-single.bind(x => ...);  // first time, OK
-single.bind(x => ...);  // second time, error
+lpromise.bind(x => ...);  // first time, OK
+lpromise.bind(x => ...);  // second time, error
 \end{minted}
 
-Having these in mind, one can describe the language of the embedded linear types as follows:
+\section{Lazy Type of \texttt{Single}}
+
+A \texttt{Single} is very similar to an \texttt{LPromise}, except for its laziness: The callbacks are only computed when the \texttt{exec} method is called.
+
+\begin{minted}{typescript}
+const single = Single.fromValue(12);
+single.bind(console.log);  // nothing happens...
+single.exec(() => {});     // now, it prints to console
+\end{minted}
+
+\section{Linear Embedded Language}
+One can describe the language of the embedded linear types as follows:
 \[
 \A ::= \mathtt{LUnit} \mid \mathtt{LZero} \mid \mathtt{[}\A, \A\mathtt{]} \mid \A\mbox{~\texttt{=>}~} \A \mid \mbox{\texttt{Lin<}}\T\mbox{\texttt{>}} \mid \mbox{\texttt{Single<}}\A\mbox{\texttt{>}}.
 \]
