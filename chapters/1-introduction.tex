@@ -6,15 +6,15 @@ Event-driven programming is becoming the standard paradigm for programming in al
 
 In such a world, laying a basis for event-driven programming is necessary more than ever. \cite{Paykin2016TheEO} introduced a type system based on linear/non-linear logic of \cite{DBLP:conf/csl/Benton94} and linear-time temporal logic of \cite{DBLP:conf/focs/Pnueli77} and inspired by the linear logic of \cite{DBLP:journals/tcs/Girard87}. We will refer to this type system and the theory around it as linear-time temporal type theory, or LTTT for short.
 
-We will explain and examine LTTT from different perspectives. A Coq implementations tries to do a mechanical examination of the theory, and a TypeScript implementation and discussion tries to validate the theory in action.
+We will explain and examine LTTT from different perspectives. A Coq implementation tries to do a mechanical examination of the theory, and a TypeScript implementation and discussion try to validate the theory in action.
 
 \subsection{Generic Store}
 
-Typing contexts lie at the core of type inference relations, storing all the hypotheses of a sequent. Having the right data model for the context is specially important as it will affect your typing rules as well as the proofs about them.
+Typing contexts lie at the core of type inference relations, storing all the hypotheses of a sequent. Having the right data model for the context is especially important as it will affect the typing rules as well as the proofs about them.
 
 Among his libraries for the locally nameless infrastructure, Arthur \cite{DBLP:journals/jar/Chargueraud12} built a generic model for environments, and later Emmanuel \cite{DBLP:journals/corr/abs-1112-1316} rewrote his generic environments model in Coq 8.3, publishing it as a standalone Coq library, namely \texttt{generic-environments}\footnote{\url{https://github.com/coq-community/generic-environments}}.
 
-The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of current thesis.
+The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of the current thesis.
 
 Still, the implementation of \texttt{generic-environments} made use of Coq features that had breaking changes in the newer versions, hence a new simpler model was implemented.
 
@@ -22,11 +22,11 @@ Still, the implementation of \texttt{generic-environments} made use of Coq featu
 
 Linear and affine types are not supported by many mainstream programming languages. \cite{JenniferPaykin2018} worked on embedding linear types in non-linear host languages. She particularly implemented an embedding for Coq and Haskell.
 
-To study event-driven programming in action, we chose JavaScript as it is the most popular programming language. Furthermore, the server-side JS is async by nature, and hence most of the logic written in Node.JS are wrapped into callbacks or async types such as \texttt{Promise} and \texttt{Observable}.
+To study event-driven programming in action, we chose JavaScript for multiple reasons. To name one, the server-side JS is async by nature, and hence most of the logic written in Node.JS are wrapped into callbacks or async types such as \texttt{Promise} and \texttt{Observable}.
 
-TypeScript is currently the typed version JavaScript, and hence was used for our study. But, there are fundamental differences between TypeScript and Haskell or Coq. Types in TypeScript are parts of the metalanguage and are not shipped to the executable code. Hence, one has very limited access to types in the runtime and particularly cannot store them in a key-value store.
+TypeScript is currently the typed version of JavaScript and hence was used for our study. But, there are fundamental differences between TypeScript and Haskell or Coq. Types in TypeScript are parts of the metalanguage and are not shipped to the executable code. Hence, one has very limited access to types in the runtime and particularly cannot store them in a key-value store.
 
-So, to embed linearity into TypeScript/JavaScript, one should employ logic that has similar behaviour.
+So, to embed linearity into TypeScript/JavaScript, one should employ logic that has similar behavior.
 
 \input{chapters/1-1-thesis-statement}
 \input{chapters/1-2-conventions}
