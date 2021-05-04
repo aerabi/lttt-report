@@ -110,7 +110,7 @@ We say the store $S$ is a subset of the store $S'$, writing $S \sqsubseteq S'$, 
 The subset relation $\sqsubseteq$ on the stores is reflexive and transitive. Furthermore, the equivalence relation $\equiv$ is reflexive, transitive, and symmetric.
 \end{lemma}
 
-\begin{definition}[Normality]
+\begin{definition}
 We say a store $S$ is \textit{duplicated}, if it has duplicated keys, recursively defined as follows:
 \begin{itemize}
     \item If $S = S' :: \angkv$ and $\ang{k, \cdot} \in S'$, then $S$ is duplicated,
@@ -119,8 +119,23 @@ We say a store $S$ is \textit{duplicated}, if it has duplicated keys, recursivel
 If $S$ is not duplicated, we call it \textit{unique-paired}.
 \end{definition}
 
+From now on, we would like to call two stores \textit{equal} if they are \textit{equivalent}.
+
+\begin{axiom}[Extensionality]
+\label{axiom:extentionality}
+Let $B$ and $C$ be stores. Then $B = C$ if $B \equiv C$.
+\end{axiom}
+
+\begin{corollary}
+Let $B$ and $C$ be stores. Then $B = C$ iff $B \equiv C$.
+\end{corollary}
+\begin{proof}
+Follows from reflexiveness of $\equiv$.
+\end{proof}
+
 \begin{theorem}[Commute]
-Let $B$ and $C$ be stores. If $B \circ C$ is unique-paired, then $B \circ C \equiv C \circ B$.
+\label{theorem:commute}
+Let $B$ and $C$ be stores. If $B \circ C$ is unique-paired, then $B \circ C = C \circ B$.
 \end{theorem}
 
 \begin{corollary}[Exchange]

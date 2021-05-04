@@ -1,1 +1,28 @@
 \chapter{Conclusion}\label{chap:conclusion}
+
+\section{Generic Store}
+
+The choice of data model representing the typing context is very important. In an earlier implementation of linear lambda calculus\footnote{\url{https://github.com/aerabi/llc}} based on the work of \cite{DavidWalker2004}, we learned that most of the proofs consist of reasoning about the context rather than the rules themselves.
+
+As an example, Walker had no assumption on the typing context, so the rules were formulated like $\Gamma_1, x : \T, \Gamma_2 \vdash x : \T$. By assuming that the elements of context can commute, the rule can be reformulated in an easier form: $\Gamma, x : \T \vdash x : \T$.
+
+We used a commutative store and formulated the rules in the latter form to make proofs easier. The commutativity (Theorem \ref{theorem:commute}) was achieved with a membership relation (Definition \ref{defn:generic-context-membership}) used together with an axiom of extentionality (Axiom \ref{axiom:extentionality}).
+
+\section{QuickChick}
+
+We attempted to check validity of the presented type system by QuickChick (\cite{DBLP:conf/itp/Paraskevopoulou15}), which is an automated testing tool for Coq. Although all of the necessary infrastructure for using QuickChick (e.g. generators for different types, string representations of them, computable proofs of their decidability, etc.)~was implemented, our attempt to use QuickChick finally failed as Coq (as of version 8.12) was unable to infer instances for mutually inductive types. The types $\T$ and $\A$ are mutually inductive types, defined together. This is also the case for $\t$ and $\e$. QuickChick uses Coq's instance inference to infer that a type is \texttt{Checkable} if a certain criteria is met. This part was broken in our case.
+
+Without wasting any more time, we started proving different statements about the type system directly. These statements were later translated into TypeScript unit tests and were tested against the newly introduced async types.
+
+\section{LTTT in TypeScript}
+
+The TypeScript implementation is published as an NPM package called \texttt{lttt}\footnote{\url{https://www.npmjs.com/package/lttt}}. The package exports the following types:
+\begin{itemize}
+    \item \texttt{Lin}. The linear type that become unavailable after first usage.
+    \item \texttt{LPromise}. Analogous to \texttt{Promise<Lin<}$\T$\texttt{>{}>}, it's a type for values that become available eventually, and then can be used only once.
+    \item \texttt{Single}. Analogous to \texttt{Observable<Lin<}$\T$\texttt{>{}>} and the \texttt{Single} type of RxJava, it's a lazy type for a single value that become available eventually, and then can be used only once.
+\end{itemize}
+
+The type \texttt{Single} is specially very useful in practice. After contributing to it a bit further, I will use it in the production TypeScript code that I'm developing.
+
+The key difference between \texttt{Single} and \texttt{Observable} is the the fact that the former wraps only one element, rather than many. This shows how close the $\diamond\A$ type is to the \texttt{Observable}.
