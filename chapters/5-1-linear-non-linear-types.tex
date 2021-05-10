@@ -87,5 +87,5 @@ single.exec(() => {});     // now, it prints to console
 \section{Linear Embedded Language}
 One can describe the language of the embedded linear types as follows:
 \[
-\A ::= \mathtt{LUnit} \mid \mathtt{LZero} \mid \mathtt{[}\A, \A\mathtt{]} \mid \A\mbox{~\texttt{=>}~} \A \mid \mbox{\texttt{Lin<}}\T\mbox{\texttt{>}} \mid \mbox{\texttt{Single<}}\A\mbox{\texttt{>}}.
+\A ::= \mathtt{LUnit} \mid \mathtt{LZero} \mid \mbox{\texttt{LPair<}}\A, \A\mbox{\texttt{>}} \mid \mbox{\texttt{LFun<}}\A, \A\mbox{\texttt{>}} \mid \mbox{\texttt{Lin<}}\T\mbox{\texttt{>}} \mid \mbox{\texttt{Single<}}\A\mbox{\texttt{>}}.
 \]

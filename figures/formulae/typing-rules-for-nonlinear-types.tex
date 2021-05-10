@@ -43,7 +43,7 @@
 \\ \\ 
 \infer[\diamond\mbox{-I}]{\Gamma; \Delta \vdash \mathtt{return}~\e : \diamond\A}{\Gamma; \Delta \vdash \e : \A}
 ~~~~ ~~~~
-\infer[\diamond\mbox{-E}]{\Gamma; \Delta_1, \Delta_2 \vdash \mathtt{let}~\floor{x} = \e_1~\mathtt{in}~\e_2 : \diamond\mathfrak{B}}{
+\infer[\diamond\mbox{-E}]{\Gamma; \Delta_1, \Delta_2 \vdash \mathtt{bind}~x = \e_1~\mathtt{in}~\e_2 : \diamond\mathfrak{B}}{
     \Gamma; \Delta_1 \vdash \e_1 : \diamond\A
     &
     \Gamma; \Delta_2, x : \A \vdash \e_2 : \diamond\mathfrak{B}

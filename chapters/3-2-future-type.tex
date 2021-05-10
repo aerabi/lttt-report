@@ -1,3 +1,7 @@
 \section{The Future Type}
 
-The $\diamond$ modality denotes the type of a variable that will become available eventually. Think of $\diamond$ as \texttt{Promise} in the sense of Promise/A specification, or \texttt{Observable} in the Rx, or the \texttt{Future} in Scala/C++.
+The future modality $\diamond$ denotes the type of a variable that will become available eventually. Think of $\diamond$ as \texttt{Promise} in the sense of Promise/A specification, or \texttt{Observable} in the Rx, or the \texttt{Future} in Scala/C++.
+
+The \texttt{return} function in the toy language is a function that turns an already available variable into a future variable that becomes available immediately. Type of \texttt{return} can be represented as $\square\A \multimap \diamond\A$ which corresponds to axiom D of modal logic.
+
+The expression \texttt{bind}~$x = \e_1$~\texttt{in}~$\e_2$ shows the monadic nature of future types. The \texttt{then} method of promises is very similar to the \texttt{bind} operator. In JavaScript, the function passed to a \texttt{then} can return an immediate value or a promise. This is not the case with Rx that ones needs to specify whether its a \texttt{map} transformation or a \texttt{flatMap}. The bind operator of our language is more similar to a \texttt{flatMap} and has the type $\diamond\A \otimes (\A \multimap \diamond\mathfrak{B}) \multimap \diamond\mathfrak{B}$. A \texttt{map} operator in contrast has the type $\diamond\A \otimes (\A \multimap \mathfrak{B}) \multimap \diamond\mathfrak{B}$.
