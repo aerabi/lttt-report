@@ -1,0 +1,24 @@
+\section{Modal Logic}
+
+Modal logic is a collection of formal systems initially created to reason about necessity and possibility. These two are denoted by two modalities $\diamond\varphi$, that reads ``possibly $\varphi$'', and $\square\varphi$, that reads ``necessarily $\varphi$''.
+
+So, the language of the modal logic is defined by the following grammar:
+\[
+\alpha ::= \bot \mid x \mid \alpha \rightarrow \alpha \mid \alpha \vee \alpha \mid \alpha \wedge \alpha \mid \diamond\alpha \mid \square\alpha.
+\]
+Here the modalities $\diamond$ and $\square$ are De Morgan duals:
+\begin{itemize}
+    \item $\diamond\varphi$ ``possibly $\varphi$'' is equivalent to $\neg\square\neg\varphi$ ``not necessarily not $\varphi$'',
+    \item $\square\varphi$ ``necessarily $\varphi$'' is equivalent to $\neg\diamond\neg\varphi$ ``not possibly not $\varphi$''.
+\end{itemize}
+
+The following are a few axioms in modal logic:
+\begin{itemize}
+    \item \textbf{N}. $\vdash \varphi$ then $\vdash \square\varphi$.
+    \item \textbf{K}. $\square(\varphi \rightarrow \psi) \rightarrow (\square\varphi \rightarrow \square\psi)$.
+    \item \textbf{T}. $\square\varphi \rightarrow \varphi$.
+    \item \textbf{4}. $\square\varphi \rightarrow \square\square\varphi$.
+    \item \textbf{5}. $\diamond\varphi \rightarrow \square\diamond\varphi$.
+    \item \textbf{B}. $\varphi \rightarrow \square\diamond\varphi$.
+    \item \textbf{D}. $\square\varphi \rightarrow \diamond\varphi$.
+\end{itemize}

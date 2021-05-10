@@ -1,0 +1,20 @@
+\section{Temporal Logic}
+
+Temporal logic as an umbrella term is the study of reasoning about propositions qualified in terms of time. Formulating temporal logic as a modal logic was first done by \cite{PRIOR1957,PRIOR1967,prior1968papers} and then ported to computer science by \cite{DBLP:conf/focs/Pnueli77}.
+
+Prior's 4 tense operators were the following (see \cite{sep-logic-temporal}):
+\begin{itemize}
+    \item $P\varphi$, ``It has at some time been the case that $\varphi$''.
+    \item $F\varphi$, ``It will at some time be the case that $\varphi$''.
+    \item $H\varphi$, ``It has always been the case that $\varphi$''.
+    \item $G\varphi$, ``It will always be the case that $\varphi$''.
+\end{itemize}
+
+As we are not interested in the past, we will omit $P$ and $H$, and show the other two, $F$ and $G$, with $\diamond$ and $\square$, respectively. Note that $F$ and $G$ form a modal logic, and e.g. $\neg{}F\neg\varphi$ ``not eventually not $\varphi$'' is equivalent to $G\varphi$ ``always $\varphi$''. Here $G$ is always in the sense of ``from now on''.
+
+The language of temporal logic is then the same as the language of modal logic, but one can add more operators:
+\begin{itemize}
+    \item Next. $N\varphi$, or $\circ\varphi$, ``$\varphi$ holds in the next stage''.
+    \item Until. $\varphi~U~\psi$, or $\varphi~\spadesuit~\psi$, ``$\varphi$ (holds at least) until $\psi$ (and $\psi$ has to hold eventually)''.
+    \item Release. $\varphi~R~\psi$, or $\varphi~\clubsuit~\psi$, ``$\varphi$ releases $\psi$'', or ``$\psi$ is true until and including the point where $\varphi$ becomes true (if $\varphi$ never becomes true, $\psi$ has to stay true forever)''.
+\end{itemize}

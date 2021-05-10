@@ -1,0 +1,37 @@
+\section{Linear-Time Temporal Logic}
+
+Linear-time temporal logic (LTL) is a modal temporal logic reasoning about the linear time, in contrast to the branching-time temporal logics such as computation tree logic (CTL). LTL was introduced by \cite{DBLP:conf/focs/Pnueli77}.
+
+LTL adds two more operators to the temporal logic:
+\begin{itemize}
+    \item Weak until. $\varphi~W~\psi$, or $\varphi~\varheartsuit~\psi$, ``$\varphi$ (holds at least) until $\psi$ (and $\varphi$ holds forever if $\psi$ never becomes true)''.
+    \item Strong release. $\varphi~M~\psi$, or $\varphi~\vardiamondsuit~\psi$, ``$\psi$ is true until and including the point where $\varphi$ becomes true (and $\varphi$ has to hold eventually)''.
+\end{itemize}
+
+The following equivalences hold in LTL:
+\begin{itemize}
+    \item Next is self-dual: $\neg\circ\neg\varphi \equiv \circ\varphi$.
+    \item Future/eventually and always are dual:
+    \begin{eqnarray*}
+    \neg\diamond\neg\varphi &\equiv& \square\varphi, \\
+    \neg\square\neg\varphi &\equiv& \diamond\varphi.
+    \end{eqnarray*}
+    \item Until and release are dual: 
+    \begin{eqnarray*}
+    \neg(\neg\varphi~\spadesuit~\neg\psi) &\equiv& \varphi~\clubsuit~\psi, \\
+    \neg(\neg\varphi~\clubsuit~\neg\psi) &\equiv& \varphi~\spadesuit~\psi.
+    \end{eqnarray*}
+    \item Weak until and strong release are dual: 
+    \begin{eqnarray*}
+    \neg(\neg\varphi~\varheartsuit~\neg\psi) &\equiv& \varphi~\vardiamondsuit~\psi, \\
+    \neg(\neg\varphi~\vardiamondsuit~\neg\psi) &\equiv& \varphi~\varheartsuit~\psi.
+    \end{eqnarray*}
+\end{itemize}
+
+Some special temporal axioms in LTL are the following:
+\begin{itemize}
+    \item $\square\varphi \rightarrow \square\square\varphi$ (4).
+    \item $\square\square\varphi \rightarrow \square\varphi$ (follows from T).
+    \item $\diamond\varphi \rightarrow \diamond\diamond\varphi$ (follows from 5 and D). 
+    \item $\diamond\diamond\varphi \rightarrow \diamond\varphi$.
+\end{itemize}

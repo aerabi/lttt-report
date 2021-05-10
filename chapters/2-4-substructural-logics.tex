@@ -16,7 +16,7 @@ Three common structural rules are:
         ~~~~ ~~~~
         \infer=[\mbox{Contr}]{\Gamma_1, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}{\Gamma_1, x : \A, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
-    Another version of the weakening rule is proposed by \cite{DavidWalker2004} (in \cite{10.5555/1076265}) for type systems:
+    Another version of the weakening rule is proposed by \cite{DavidWalker2004} for type systems:
     \begin{gather*}
         \infer=[\mbox{Contr}]{\Gamma_1, x_1 : \A, \Gamma_2 \vdash \t[x_2 \mapsto x_1, x_3 \mapsto x_1] : \mathfrak{B}}{\Gamma_1, x_2 : \A, x_3 : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
