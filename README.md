@@ -8,3 +8,7 @@ Report for "A Basis for Event-Driven Programming" based on Linear Temporal Type 
 ## Build
 
 This project is built with PDFLaTeX. To build, one can connect it to Overleaf v2 and use the GitHub sync function. The PDF in the `out` folder must be uploaded manually.
+
+## Credits
+
+This repo(rt) is based on / a _hard fork_ of [`aerabi/msc-thesis`](https://github.com/aerabi/lttt-typescript).
