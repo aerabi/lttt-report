@@ -4,9 +4,19 @@
 
 Event-driven programming is becoming the standard paradigm for programming in almost every domain: backend, frontend, GUI, etc. All of the framework and library vendors are now offering \textit{reactive}, \textit{i.e.} event-driven interfaces for their products. Spring framework came up with WebFlux, Angular is all wrapped in RxJS's observables, and Node.js is async by nature. Reactive drivers are being implemented for databases, to support an end-to-end reactive spectrum.
 
-In such a world, laying a basis for event-driven programming is necessary more than ever. \cite{Paykin2016TheEO} introduced a type system based on linear/non-linear logic of \cite{DBLP:conf/csl/Benton94} and linear-time temporal logic of \cite{DBLP:conf/focs/Pnueli77} and inspired by the linear logic of \cite{DBLP:journals/tcs/Girard87}. We will refer to this type system and the theory around it as linear-time temporal type theory, or LTTT for short.
+Unfortunately, event-driven programming can be difficult, as it is a combination of two seemingly contradictory elements: callbacks and states. When callbacks change the state of a program, we say they have \textit{side effects}, a very unpopular term among developers (\cite{aerabi_2020}).
 
-We will explain and examine LTTT from different perspectives. A Coq implementation tries to do a mechanical examination of the theory, and a TypeScript implementation and discussion try to validate the theory in action.
+To overcome these problems, many different and somewhat ad hoc approaches were taken. Scala has only 3 different built-in abstractions for event types: \texttt{Promise}, \texttt{Future}, and \texttt{Signal} (\cite{deprecating2010}), putting RxScala aside. And of course we have access to Java libraries in Scala, adding Reactor and similar abstractions to the bunch.
+
+In such a world, laying a basis for event-driven programming is necessary more than ever.
+
+This work aims to study event-driven programming by identifying structures common to it with a natural perspective from temporal logic. Under this correspondence, an event (specially in the Rx or \texttt{Promise} sense) is computation that can eventually return a value, and can be identified with the temporal logic's \textit{eventually}/\textit{future} modality $\diamond\A$.
+
+A correspondence between linear-time temporal logic (LTL) and event-driven programming is presented in terms of Curry--Howard correspondence, and then is tried to be verified with an implementation in the proof-assistant Coq language (\cite{mohammad_ali_a_rabi_2021_4749276}). A novel reformulation of the theory behind LTL and Curry--Howard correspondence is also presented. And finally a TypeScript implementation tries to relate the theory to real-life production code written in JavaScript/TypeScript.
+
+\subsection{Verifying LTTT}
+
+\cite{Paykin2016TheEO} introduced a type system based on linear/non-linear logic of \cite{DBLP:conf/csl/Benton94} and linear-time temporal logic of \cite{DBLP:conf/focs/Pnueli77} and inspired by the linear logic of \cite{DBLP:journals/tcs/Girard87}. We will refer to this type system and the theory around it as linear-time temporal type theory, or LTTT for short. The Coq implementation aims to verify the soundness of LTTT.
 
 \subsection{Generic Store}
 
@@ -14,7 +24,7 @@ Typing contexts lie at the core of type inference relations, storing all the hyp
 
 Among his libraries for the locally nameless infrastructure, Arthur \cite{DBLP:journals/jar/Chargueraud12} built a generic model for environments, and later Emmanuel \cite{DBLP:journals/corr/abs-1112-1316} rewrote his generic environments model in Coq 8.3, publishing it as a standalone Coq library, namely \texttt{generic-environments}\footnote{\url{https://github.com/coq-community/generic-environments}}.
 
-The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of the current thesis.
+The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the man behind \texttt{coq-community}, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of the current thesis.
 
 Still, the implementation of \texttt{generic-environments} made use of Coq features that had breaking changes in the newer versions, hence a new simpler model was implemented.
 

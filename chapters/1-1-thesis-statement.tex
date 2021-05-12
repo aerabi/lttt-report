@@ -4,8 +4,13 @@
 To support this thesis, this dissertation makes the following contributions:
 
 \begin{itemize}
-    \item \chapref{chap:background} contains a tutorial and survey of different logics that may be used to form a basis for event-driven programming.
+    \item \chapref{chap:background} contains a tutorial and novel formulation of theoretical background for setting a basis for event-driven programming. This includes:
+    \begin{itemize}
+        \item A crash course on intuitionistic logic, simply typed lambda calculus, linear lambda calculus, linear logic, and modal logic,
+        \item Stating Curry--Howard correspondence,
+        \item A review and reformulation of (linear-time) temporal logic.
+    \end{itemize}
     \item \chapref{chapter:the-type-system} formulates the linear-time temporal type theory, LTTT, based on work of \cite{Paykin2016TheEO}, and discusses its connection to the real-world event-driven programming paradigm.
-    \item \chapref{chap:coq-implementation} presents the implementation of LTTT in Coq, to verify that the theory's soundness.
-    \item \chapref{chap:typescript-implementation} presents an implementation of LTTT in TypeScript, to demonstrate LTTT in practice, and to set an infrastructure for further discussion.
+    \item \chapref{chap:coq-implementation} presents the implementation of LTTT in Coq, to verify that the theory's soundness. This chapter in part contains details about implementation of the generic store that is later used for proving statements about the typing rules.
+    \item \chapref{chap:typescript-implementation} presents an implementation of LTTT in TypeScript, to demonstrate LTTT in practice, and to set an infrastructure for further discussion. The TypeScript implementation is published as an NPM library and can be used in production code.
 \end{itemize}

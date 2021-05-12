@@ -23,6 +23,6 @@ The TypeScript implementation is published as an NPM package called \texttt{lttt
     \item \texttt{Single}. Analogous to \texttt{Observable<Lin<}$\T$\texttt{>{}>} and the \texttt{Single} type of RxJava, it's a lazy type for a single value that become available eventually, and then can be used only once.
 \end{itemize}
 
-The type \texttt{Single} is specially very useful in practice. After contributing to it a bit further, the author of this thesis will use it in the production TypeScript code that he is developing.
+The type \texttt{Single} is specially very useful in practice. After further contribution, the \texttt{Single} type will be added to the RxJSx\footnote{\url{https://github.com/rxjsx/rxjsx}} package.
 
 The key difference between \texttt{Single} and \texttt{Observable} is the the fact that the former wraps only one element, rather than many. This shows how close the $\diamond\A$ type is to the \texttt{Observable}.
