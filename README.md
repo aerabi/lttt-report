@@ -1,4 +1,6 @@
 # LTTT Report
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-%23f7931e.svg)](CONTRIBUTING.md)
+
 Report for "A Basis for Event-Driven Programming" based on Linear Temporal Type Theory
 
 - [The output PDF](out/thesis_main.pdf) ([direct download](https://github.com/aerabi/lttt-report/raw/master/out/thesis_main.pdf))
