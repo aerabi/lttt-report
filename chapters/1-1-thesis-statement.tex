@@ -1,4 +1,7 @@
-\section{Thesis Statement}
+\section{Contributions}
+
+\textbf{Thesis Statement.}
+
 \textit{Linear-time temporal type theory is a natural model for event-driven programming. The theory is sound and has practical applications in a variety of programming languages and libraries.}
 
 To support this thesis, this dissertation makes the following contributions:
@@ -11,6 +14,12 @@ To support this thesis, this dissertation makes the following contributions:
         \item A review and reformulation of (linear-time) temporal logic.
     \end{itemize}
     \item \chapref{chapter:the-type-system} formulates the linear-time temporal type theory, LTTT, based on work of \cite{Paykin2016TheEO}, and discusses its connection to the real-world event-driven programming paradigm.
-    \item \chapref{chap:coq-implementation} presents the implementation of LTTT in Coq, to verify that the theory's soundness. This chapter in part contains details about implementation of the generic store that is later used for proving statements about the typing rules.
+    \item \chapref{chap:coq-implementation} presents the implementation of LTTT in Coq, to verify that the theory's soundness. This includes:
+    \begin{itemize}
+        \item A Coq implementation of generic environments to be used in the typing rules as a linear and non-linear context,
+        \item A Coq implementation of typing rules and operational semantics of LTTT,
+        \item A set of proved lemmas and propositions that show interesting results or are necessary for the other theorems,
+        \item A mechanical proof of preservation.
+    \end{itemize}
     \item \chapref{chap:typescript-implementation} presents an implementation of LTTT in TypeScript, to demonstrate LTTT in practice, and to set an infrastructure for further discussion. The TypeScript implementation is published as an NPM library and can be used in production code.
 \end{itemize}
