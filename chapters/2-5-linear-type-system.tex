@@ -15,6 +15,8 @@ Once the hypothesis $\alpha$ is used to derive $\beta$, it's not available any m
 \alpha \multimap \beta, \alpha \multimap \gamma, \alpha, \alpha \vdash \beta \otimes \gamma.
 \]
 
+Even simpler, if one can buy a coffee with a coin, $\mathtt{coin} \vdash \mathtt{coffee}$, it does not mean one can buy two coffees with it, $\mathtt{coin} \not\vdash \mathtt{coffee} \otimes \mathtt{coffee}$.
+
 As \cite{DBLP:conf/mfcs/Wadler93} puts it: ``Traditional logic encourages reckless use of resources. Contraction profligately duplicates assumptions, Weakening foolishly discards assumptions. This makes sense for logic, where truth is free; and it makes sense for some programming languages, where copying a value is as cheap as copying a pointer. But it is not always sensible.''
 
 The language of linear logic, LL$(0, \multimap, \oplus, \otimes, !)$ or simply LL, is defined with the following grammar:

@@ -9,7 +9,7 @@ Here, $T$ designates constant types (take $\mathtt{Boolean} \mid \mathtt{String}
 
 \subsection{Sequent and Natural Deduction}
 
-A \textit{context} here is a set of ordered pairs $\ang{\t, \T}$, usually denoted by $\Gamma$. We additionally assume that there are no duplicate keys, making contexts \textit{functions} (in the set-theoretic sense). The set of keys in $\Gamma$ is denoted by $\iota_1[\Gamma]$ and the values $\iota_2[\Gamma]$. When $\iota_1[\Gamma] \cap \iota_1[\Delta] = \emptyset$, we write $\Gamma, \Delta$ for $\Gamma \cup \Delta$. We also write $\Gamma, \t: \T$ for $\Gamma, \{\ang{\t, \T}\}$.
+A \textit{context} here is a sequence of ordered pairs $\ang{\t, \T}$, usually denoted by $\Gamma$. We additionally assume that there are no duplicate keys. The set of keys in $\Gamma$ is denoted by $\iota_1[\Gamma]$ and the values $\iota_2[\Gamma]$. When $\iota_1[\Gamma] \cap \iota_1[\Delta] = \emptyset$, we write $\Gamma, \Delta$ for $\Gamma \cup \Delta$. We also write $\Gamma, \t: \T$ for $\Gamma, \{\ang{\t, \T}\}$.
 
 \begin{definition}
 The relation $\Gamma \vdash \t : \T$ for $\lambda(\rightarrow)$ is defined syntactically by \figref{fig:simply-typed-lambda-calculus-natural-deduction}.

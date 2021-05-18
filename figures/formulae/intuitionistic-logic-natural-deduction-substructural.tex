@@ -3,10 +3,10 @@
 ~~~~ ~~~~
 \infer[\mbox{EFQ}]{\Gamma \vdash \beta}{\Gamma \vdash \bot}
 \\ \\ 
-\infer[\wedge\mbox{-I}]{\Gamma \vdash \alpha_1 \wedge \alpha_2}{
-    \Gamma \vdash \alpha_1
+\infer[\wedge\mbox{-I}]{\Gamma_1, \Gamma_2 \vdash \alpha_1 \wedge \alpha_2}{
+    \Gamma_1 \vdash \alpha_1
     &
-    \Gamma \vdash \alpha_2
+    \Gamma_2 \vdash \alpha_2
 }
 ~~~~ ~~~~
 \infer[\wedge\mbox{-E}]{\Gamma \vdash \alpha_i}{
@@ -15,15 +15,15 @@
 \\ \\ 
 \infer[\vee\mbox{-I}]{\Gamma\vdash \alpha_1 \vee \alpha_2}{\Gamma \vdash \alpha_i}
 ~~~~ ~~~~
-\infer[\vee\mbox{-E}]{\Gamma \vdash \beta}{
-    \Gamma \vdash \alpha_1 \vee \alpha_2
+\infer[\vee\mbox{-E}]{\Gamma_1, \Gamma_2 \vdash \beta}{
+    \Gamma_1 \vdash \alpha_1 \vee \alpha_2
     &
-    \Gamma, \alpha_1 \vdash \beta
+    \Gamma_2, \alpha_1 \vdash \beta
     &
-    \Gamma, \alpha_2 \vdash \beta
+    \Gamma_2, \alpha_2 \vdash \beta
 }
 \\ \\ 
 \infer[\rightarrow\mbox{-I}]{\Gamma \vdash \alpha \rightarrow \beta}{\Gamma, \alpha \vdash \beta}
 ~~~~ ~~~~
-\infer[\rightarrow\mbox{-E}]{\Gamma \vdash \beta}{\Gamma \vdash \alpha & \Gamma \vdash \alpha \rightarrow \beta}
+\infer[\rightarrow\mbox{-E}]{\Gamma_1, \Gamma_2 \vdash \beta}{\Gamma_1 \vdash \alpha & \Gamma_2 \vdash \alpha \rightarrow \beta}
 \end{gather*}

@@ -1,9 +1,9 @@
 \section{Curry--Howard Correspondence}
 
-The following theorem, states the Curry--Howard correspondence between implicational fragment of intuitionistic propositional logic IPC$(\rightarrow)$ and the simply typed lambda calculus $\lambda(\rightarrow)$.
+The following theorem, states the Curry--Howard correspondence between implicational fragment of intuitionistic propositional logic IPL$(\rightarrow)$ and the simply typed lambda calculus $\lambda(\rightarrow)$.
 
 \begin{theorem}
-The types in $\lambda(\rightarrow)$ form an \emph{IPC}$(\rightarrow)$. Furthermore:
+The types in $\lambda(\rightarrow)$ form an \emph{IPL}$(\rightarrow)$. Furthermore:
 \begin{itemize}
     \item If $\Gamma \vdash \t : \alpha$, then $\iota_2[\Gamma] \vdash \alpha$.
     \item If $\Delta \vdash \alpha$, then there is a $\Gamma$ and a $\t$, such that $\Delta = \iota_2[\Gamma]$ and $\Gamma \vdash \t : \alpha$. \qedhere
@@ -14,7 +14,7 @@ An interesting case is when $\Gamma = \emptyset$.
 
 \begin{corollary}
 \label{corollary:theorem-if-inhabited}
-A formula $\varphi$ in \emph{IPC}$(\rightarrow)$ is a true theorem, iff it's inhabited by a $\lambda(\rightarrow)$-term $\t$, that is $\vdash \t : \varphi$.
+A formula $\varphi$ in \emph{IPL}$(\rightarrow)$ is a true theorem, iff it's inhabited by a $\lambda(\rightarrow)$-term $\t$, that is $\vdash \t : \varphi$.
 \end{corollary}
 
 An example is the formula $(\beta \rightarrow \alpha) \rightarrow (\gamma \rightarrow \beta) \rightarrow \gamma \rightarrow \alpha$. Only the fact that the $\lambda(\rightarrow)$-term $\lambda a. \lambda b. \lambda c. a (b c)$ inhabits this type, proves it. \figref{fig:curry-howard-example} demonstrate a proof of it by natural deduction. For neatness, we named $\Gamma := a : \beta \rightarrow \alpha, b : \gamma \rightarrow \beta, c : \gamma$.

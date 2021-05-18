@@ -48,19 +48,30 @@ with $a$ ranging over atoms. To denote formulae, we usually use small Greek lett
 
 \subsection{Sequent and Natural Deduction}
 
-A \textit{context} is a set of $\alpha$'s, usually denoted by $\Gamma$. We write $\Gamma, \Delta$ for $\Gamma \cup \Delta$, and also $\Gamma, \alpha$ for $\Gamma \cup \{\alpha\}$. 
-
 \begin{definition}[Sequent]
-The relation $\Gamma \vdash \alpha$ is defined syntactically by Figure \ref{fig:intuitionistic-logic-natural-deduction}, but can be though of as ``$\alpha$ holds if all $\Gamma$ holds''. The relation $\vdash$ is called \textit{sequent}, the elements of $\Gamma$ are called \textit{antecedents} or \textit{hypotheses}, and $\alpha$ is called \textit{succedents} or \textit{consequents}. When $\Gamma = \emptyset$, we write $\vdash \alpha$, and say that $\alpha$ is a \textit{theorem}.
+A sequent is a relation on sequences of formulae: $\Gamma \vdash \Sigma$ means ``if all of formulae in $\Gamma$ hold, then at least one formula in $\Sigma$ holds''. A special case is when $\Sigma$ is a singleton, which then we write $\Gamma \vdash \alpha$ for ``$\alpha$ holds if all $\Gamma$ hold''.
+The relation $\vdash$ is called \textit{sequent}, the elements of $\Gamma$ are called \textit{antecedents} or \textit{hypotheses}, and the elements of $\Sigma$ are called \textit{succedents} or \textit{consequents}. For empty $\Gamma$ and singleton $\sigma$ we write $\vdash \alpha$ and say that $\alpha$ is a \textit{theorem}.
+\end{definition}
+
+The sequence of antecedents, $\Gamma$, is also called a \textit{context}. We write $\Gamma, \Delta$ for $\Gamma \cup \Delta$, and also $\Gamma, \alpha$ for $\Gamma, \{\alpha\}$.
+
+There are multiple equivalent proof systems that deal with sequents. The most famous ones are the following:
+\begin{itemize}
+    \item Natural deduction,
+    \item Hilbert systems,
+    \item Gentzen systems.
+\end{itemize}
+We will use the natural deduction, because it's indeed more natural.
+
+\begin{definition}[Natural Deduction]
+The set of inference rules defined syntactically by Figure \ref{fig:intuitionistic-logic-natural-deduction} is called \textit{natural deduction}. It consists of introduction and elimination rules for the logical symbols, an axiom, and the \textit{principle of explosion} (Latin: \textit{ex falso quodlibet} ``from false everythin [follows]'', EFQ).
 \end{definition}
 
 \begin{figure}
     \centering
-    \include{figures/formulae/intuitionistic-logic-natural-deduction}
+    \include{figures/formulae/intuitionistic-logic-natural-deduction-substructural}
     \caption{Natural deduction rules of the propositional intuitionistic logic}
     \label{fig:intuitionistic-logic-natural-deduction}
 \end{figure}
-
-The proof system which consists of the sequent relation together with the deduction rules, is called \textit{natural deduction}.
 
 The subset of IPL that only deals with $\alpha ::= x \mid \alpha \rightarrow \alpha$, with three rules of Ax, $\rightarrow$-I, and -E, is called IPL$(\rightarrow)$.

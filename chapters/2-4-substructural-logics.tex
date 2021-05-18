@@ -52,3 +52,29 @@ To understand how the structural rules for the type systems affect programming l
     \item \textbf{Linear}. Every variable must be used exactly once.
     \item \textbf{Ordered}. Every variable must be used exactly once and in the order in which it is introduced.
 \end{itemize}
+
+\section{Intuitionistic Logic with Structural Rules}
+
+\begin{figure}
+    \centering
+    \include{figures/formulae/intuitionistic-logic-natural-deduction}
+    \caption{Natural deduction rules of the propositional intuitionistic logic, assuming contraction}
+    \label{fig:intuitionistic-logic-natural-deduction-contraction}
+\end{figure}
+
+Depending on the structural rules one assumes, the inference rules may differ. Usually, contraction is assumed for the intuitionistic logic, so the inference rules are represented as in \figref{fig:intuitionistic-logic-natural-deduction-contraction}.
+
+For example, using the $\rightarrow$-E rule from \figref{fig:intuitionistic-logic-natural-deduction}, there is a contraction happening under the hood:
+\[
+\infer={\Gamma \vdash \beta}{
+    \infer[\mbox{$\rightarrow$-E}]{\Gamma, \Gamma \vdash \beta}{
+        \Gamma \vdash \alpha
+        &
+        \Gamma \vdash \alpha \rightarrow \beta
+    }
+}
+\]
+
+Similarly, if one does not assume exchange, the axiom will become $\Gamma_1, \alpha, \Gamma_2 \vdash \alpha$ instead of simply $\Gamma, \alpha \vdash \alpha$.
+
+From now on, we assume exchange for all of the inference rules, and contraction for the non-linear logics and type systems.
