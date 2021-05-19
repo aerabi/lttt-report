@@ -10,21 +10,21 @@ LTL adds two more operators to the temporal logic:
 
 The following equivalences hold in LTL:
 \begin{itemize}
-    \item Next is self-dual: $\neg\bigcirc\neg\varphi \equiv \bigcirc\varphi$.
+    \item Next is self-dual: $\neg\bigcirc\varphi \equiv \bigcirc\neg\varphi$.
     \item Future/eventually and always are dual:
     \begin{eqnarray*}
-    \neg\diamond\neg\varphi &\equiv& \square\varphi, \\
-    \neg\square\neg\varphi &\equiv& \diamond\varphi.
+    \neg\diamond\varphi &\equiv& \square\neg\varphi, \\
+    \neg\square\varphi &\equiv& \diamond\neg\varphi.
     \end{eqnarray*}
     \item Until and release are dual: 
     \begin{eqnarray*}
-    \neg(\neg\varphi~\spadesuit~\neg\psi) &\equiv& \varphi~\clubsuit~\psi, \\
-    \neg(\neg\varphi~\clubsuit~\neg\psi) &\equiv& \varphi~\spadesuit~\psi.
+    \neg(\varphi~\spadesuit~\psi) &\equiv& \neg\varphi~\clubsuit~\neg\psi, \\
+    \neg(\varphi~\clubsuit~\psi) &\equiv& \neg\varphi~\spadesuit~\neg\psi.
     \end{eqnarray*}
     \item Weak until and strong release are dual: 
     \begin{eqnarray*}
-    \neg(\neg\varphi~\varheartsuit~\neg\psi) &\equiv& \varphi~\vardiamondsuit~\psi, \\
-    \neg(\neg\varphi~\vardiamondsuit~\neg\psi) &\equiv& \varphi~\varheartsuit~\psi.
+    \neg(\varphi~\varheartsuit~\psi) &\equiv& \neg\varphi~\vardiamondsuit~\neg\psi, \\
+    \neg(\varphi~\vardiamondsuit~\psi) &\equiv& \neg\varphi~\varheartsuit~\neg\psi.
     \end{eqnarray*}
 \end{itemize}
 
