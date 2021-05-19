@@ -4,7 +4,7 @@ Modal logic is a collection of formal systems initially created to reason about 
 
 So, the language of the modal logic is defined by the following grammar:
 \[
-\alpha ::= \bot \mid x \mid \alpha \rightarrow \alpha \mid \alpha \vee \alpha \mid \alpha \wedge \alpha \mid \diamond\alpha \mid \square\alpha.
+\alpha ::= \bot \mid a \mid \alpha \rightarrow \alpha \mid \alpha \vee \alpha \mid \alpha \wedge \alpha \mid \diamond\alpha \mid \square\alpha.
 \]
 Here the modalities $\diamond$ and $\square$ are De Morgan duals:
 \begin{itemize}
@@ -12,7 +12,7 @@ Here the modalities $\diamond$ and $\square$ are De Morgan duals:
     \item $\square\varphi$ ``necessarily $\varphi$'' is equivalent to $\neg\diamond\neg\varphi$ ``not possibly not $\varphi$''.
 \end{itemize}
 
-The following are a few axioms in modal logic:
+The following are a few well-known axioms in modal logic:
 \begin{itemize}
     \item \textbf{N}. $\vdash \varphi$ then $\vdash \square\varphi$.
     \item \textbf{K}. $\square(\varphi \rightarrow \psi) \rightarrow (\square\varphi \rightarrow \square\psi)$.
@@ -22,3 +22,4 @@ The following are a few axioms in modal logic:
     \item \textbf{B}. $\varphi \rightarrow \square\diamond\varphi$.
     \item \textbf{D}. $\square\varphi \rightarrow \diamond\varphi$.
 \end{itemize}
+A modal logic may adopt some of these axioms and reject some. E.g. S5, one of the well-known modal logics, adopts either all except \textbf{5} and \textbf{D}, or all except \textbf{4}, \textbf{B}, and \textbf{D}.

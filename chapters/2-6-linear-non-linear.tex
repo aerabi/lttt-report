@@ -2,13 +2,13 @@
 
 It is usually not enough to have only linear members in the logic or type system. In many domains, when using the linear types, they are mixed with unrestricted ones. As an example, \cite{DavidWalker2004} prefixes his types with \texttt{lin} or \texttt{un} and treats them differently.
 
-In the linear logic, the modality $!$ is used for addressing this shortcoming. Members of the form $!\alpha$ can be duplicated or discarded. But it's not practical to be used in a type system, especially when embedding a linear type system in an unrestricted host language (see \cite{JenniferPaykin2018}).
+In the linear logic, the modality $!$ is used for addressing this shortcoming. Members of the form $!\alpha$ can be duplicated or discarded. But it's not practical to be used in a type system, as it has very limited flexibility.
 %
 The linear/non-linear logic of \cite{DBLP:conf/csl/Benton94} offers a more practical modeling of linear and non-linear logics mixed together.
 
 The language of the linear/non-linear logic, LNL, is defined with the following grammar:
 \begin{align*}
-    &\tau ::= \top \mid T \mid \tau \times \tau \mid \tau + \tau \mid \tau \rightarrow \tau \mid \ceil{\alpha}, \\
-    &\alpha ::= 1 \mid A \mid \alpha \otimes \alpha \mid \alpha \oplus \alpha \mid \alpha \multimap \alpha \mid \floor{\tau}.
+    &\tau ::= \top \mid t \mid \tau \times \tau \mid \tau + \tau \mid \tau \rightarrow \tau \mid \ceil{\alpha}, \\
+    &\alpha ::= 1 \mid a \mid \alpha \otimes \alpha \mid \alpha \oplus \alpha \mid \alpha \multimap \alpha \mid \floor{\tau}.
 \end{align*}
-Here $A$ (resp. $T$) ranges over a set of linear (resp. non-linear) atomic propositions / types, the functor $\ceil{\cdot}$ is called \textit{lift}, and the functor $\floor{\cdot}$ is called \textit{lower}. These two functors are in charge of moving between the linear and the non-linear worlds. The two connectives $\times$ and $+$ denote conjunction and disjunction.
+Here $a$ (resp. $t$) ranges over a set of linear (resp. non-linear) atomic propositions / types, the functor $\ceil{\cdot}$ is called \textit{lift}, and the functor $\floor{\cdot}$ is called \textit{lower}. These two functors are in charge of moving between the linear and the non-linear worlds. The two connectives $\times$ and $+$ denote conjunction and disjunction.
