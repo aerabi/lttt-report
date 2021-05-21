@@ -24,8 +24,8 @@ Another approach would be using the binary operators of linear-time temporal log
 
 TypeScript transpiles into JavaScript, hence the type information are lost in the runtime. The new TypeScript runtime, Deno, might change that, but it's still too soon to bet. Also, TypeScript has no plan of supporting linear/affine types (see \cite{typescript-affine}).
 
-Still, one can access the type data in the compile time. The type system can then use the already available types of \texttt{Lin} and \texttt{Single}/\texttt{LPromise} and treat them differently.
+Still, one can access the type data in the compile time. The type system can then use the already available types of \texttt{Lin} and \texttt{Single}/\texttt{LPromise} and treat them differently. ESLint can be used for this purpose, as it has access to the type information on the compile time.
 
-\section{Prove Preservation}
+\section{Generalize Preservation for Linear Types}
 
-The preservation lemma is introduced in the Coq implementation as a conjunction, and no proof is presented for it. The proof would require a mutual induction, hence a double preservation lemma for both $\T$ and $\A$ should be proved first, and then each of the separate lemmas be derived from it. The proof will consist of case analysis, dealing with the context, and reasoning about substitutions.
+The preservation lemmas for $\t$ and $\e$ are introduced and proved in Coq. Although the $\t$-Preservation (Lemma \ref{lemma:t-preservation}) has full power, the $\e$-Preservation (Lemma \ref{lemma:e-preservation-weak}) was stated and proved in a weak version, assuming linear context to be empty. A stronger result can be achieved by generalizing the lemma for non-empty linear context.

@@ -1,5 +1,24 @@
 \chapter{Conclusion}\label{chap:conclusion}
 
+\section{LTTT Typing Rules and Operational Semantics}
+
+Typing rules and operational semantics of LTTT was implemented in Coq and the preservation lemmas were proven mechanically. As a result, two new typing rules were introduced for substitution and an additional assumption was added to one of the operational semantics cases:
+\[
+\infer{\Gamma \vdash \t[x \mapsto \t'] : \T}{
+    \Gamma, x : \T' \vdash \t : \T
+    &
+    \Gamma \vdash \t' : \T'
+}
+~~~~ ~~~~
+\infer{\Gamma; \Delta_1, \Delta_2 \vdash \e[x \mapsto \e'] : \A}{
+    \Gamma; \Delta_1, x : \A' \vdash \e : \A
+    &
+    \Gamma; \Delta_2 \vdash \e' : \A'
+}
+\]
+
+Both of the lemmas stated in this thesis (Lemmas \ref{lemma:t-preservation} and \ref{lemma:e-preservation-stronger}) were stronger comparing to the ones presented in the work of \cite{Paykin2016TheEO}.
+
 \section{Generic Store}
 
 The choice of data model representing the typing context is very important. In an earlier implementation of linear lambda calculus\footnote{\url{https://github.com/aerabi/llc}} based on the work of \cite{DavidWalker2004}, we learned that most of the proofs consist of reasoning about the context rather than the rules themselves.
