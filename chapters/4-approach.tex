@@ -1,14 +1,18 @@
 \chapter{Coq Implementation of LTTT}\label{chap:coq-implementation}
 
-In this chapter we describe the Coq implementation\footnote{\url{https://github.com/aerabi/lttt}} of the type system introduced in Chapter \ref{chapter:the-type-system}. It has multiple parts that we discuss in the following sections:
+A Coq version of the typing rules and semantics introduced in \ref{chapter:the-type-system} is implemented by the author (\cite{mohammad_ali_a_rabi_2021_4749276}). This chapter is a description of the implementation.
+It has multiple parts that we discuss in the following sections:
 \begin{itemize}
-    \item A generic key-value store to be used as the typing context.
-    \item Implementation of the language types $\T$ and $\A$.
-    \item Implementation of terms and expressions, $\t$ and $\e$, respectively.
-    \item Declarative typing.
+    \item A generic key-value store to be used as the typing context
+    \item Implementation of the language types $\T$ and $\A$,
+    \item Implementation of terms and expressions, $\t$ and $\e$, respectively,
+    \item Declarative typing,
     \item Operational semantics.
 \end{itemize}
+
+The main purpose of this chapter is to verify LTTT mechanically.
 
 \input{chapters/4-1-typing-context}
 \input{chapters/4-2-the-language-and-typing-rules}
 \input{chapters/4-3-declarative-typing}
+\input{chapters/4-4-semantics}

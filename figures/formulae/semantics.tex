@@ -3,7 +3,7 @@
 (\lambda x.\t_1)\v_2 &\leadsto& \t_1 [x \mapsto \v_2]\\
 \mathtt{case}\ \ \mathtt{in}_i\v \ \ \mathtt{of}\ (\mathtt{in}_1\ x_1 \mapsto \t_1\  \lvert\  \mathtt{in}_2 \ x_2 \ \mapsto \t_2) &\leadsto& \t_i [x_i \mapsto \v]\\
 \mathtt{let}\ ()=()\ \mathtt{in} \ \e &\leadsto& \e\\
-\mathtt{let}\ (x_1,x_2)=(\e_1,\e_2)\ \mathtt{in}\ \e &\leadsto& \e[x \mapsto \e_1,x \mapsto \e_2]\\
+\mathtt{let}\ (x_1,x_2)=(\e_1,\e_2)\ \mathtt{in}\ \e &\leadsto& \e[x_1 \mapsto \e_1, x_2 \mapsto \e_2]\\
 (\lambda x.\e_1)\e_2 &\leadsto& \e_1[x \mapsto \e_2]\\
 \mathtt{bind}\ x = \mathtt{return} \ \e_1\ \mathtt{in} \ \e_2\ &\leadsto&\ \e_2 [x \mapsto \e_1]\\
 \mathtt{force}( \mathtt{suspend}\ \e)\ &\leadsto& \e\\

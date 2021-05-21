@@ -1,0 +1,68 @@
+\section{Operational Semantics}
+
+The operational semantics implementation is based on \figref{fig:operational-semantics}. Two immediate results are the following:
+
+\begin{lemma}[$\t$-Preservation]
+\label{lemma:t-preservation}
+For all $\Gamma, \t, \t', \T$, if $\Gamma \vdash \t : \T$ and $\t \leadsto \t'$, then $\Gamma \vdash \t' : \T$.
+\end{lemma}
+
+The proofs to this lemma requires a simple rule on typing substitutions:
+\[
+\infer[\mbox{$\t$-Subst}]{\Gamma \vdash \t[x \mapsto \t'] : \T}{
+    \Gamma, x : \T' \vdash \t : \T
+    &
+    \Gamma \vdash \t' : \T'
+}
+\]
+
+Or as one might express in Coq:
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Axiom <$\t$>subst_type : forall <$\Gamma$> t t' T T' x,
+  type<$\T$> (m<$\mathfrak{G}$>.append <$\Gamma$> x T') t T -> 
+  type<$\T$> <$\Gamma$> t' T' -> 
+  type<$\T$> <$\Gamma$> (SemanticsBase.<$\t$>subst t x t') T.
+\end{minted}
+
+Using this rule, the proof of Lemma \ref{lemma:t-preservation} is straightforward:
+
+\begin{minted}[escapeinside=<>,mathescape=true]{coq}
+Lemma <$\t$>_preservation : forall <$\Gamma$> t t' T, 
+  type<$\T$> <$\Gamma$> t T -> <$\t$>sem t t' -> type<$\T$> <$\Gamma$> t' T.
+Proof.
+  intros. induction H0; inversion H.
+  - inversion H2. auto.
+  - inversion H2. auto.
+  - eapply <$\t$>subst_type. inversion H3.  apply H8. apply H5.
+  - eapply <$\t$>subst_type. apply H8. inversion H7. auto.
+  - eapply <$\t$>subst_type. apply H9. inversion H7. auto.
+Qed.
+\end{minted}
+
+A weaker but similar result is expressible for the linear part:
+
+\begin{lemma}[Weak $\e$-Preservation]
+\label{lemma:e-preservation-weak}
+For all $\e, \e', \A$, if $\vdash \e : \A$ and $\e \leadsto \e'$, then $\vdash \e' : \A$.
+\end{lemma}
+
+This lemma also requires a linear version of substitution rule:
+\[
+\infer[\mbox{$\e$-Subst}]{\Gamma; \Delta_1, \Delta_2 \vdash \e[x \mapsto \e'] : \A}{
+    \Gamma; \Delta_1, x : \A' \vdash \e : \A
+    &
+    \Gamma; \Delta_2 \vdash \e' : \A'
+}
+\]
+
+The only tricky part for the proof of this lemma was an extra assumption of $x_1 \ne x_2$ for the following relation:
+\[
+\mathtt{let}\ (x_1,x_2)=(\e_1,\e_2)\ \mathtt{in}\ \e \leadsto \e[x_1 \mapsto \e_1, x_2 \mapsto \e_2].
+\]
+
+As the typing rules used in the proof of Lemma \ref{lemma:e-preservation-weak} were independent of $\Gamma$, a slightly stronger version of this lemma is also similarly provable:
+
+\begin{lemma}[Slightly Stronger $\e$-Preservation]
+\label{lemma:e-preservation-stronger}
+For all $\Gamma, \e, \e', \A$, if $\Gamma; \emptyset \vdash \e : \A$ and $\e \leadsto \e'$, then $\Gamma; \emptyset \vdash \e' : \A$.
+\end{lemma}

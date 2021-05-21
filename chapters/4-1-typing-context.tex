@@ -3,21 +3,35 @@
 \newcommand{\angkv}{\langle k, v \rangle}
 \newcommand{\angkvp}{\langle k', v' \rangle}
 
+Typing contexts lie at the core of type inference relations, storing all the hypotheses of a sequent. Having the right data model for the context is especially important as it will affect the typing rules as well as the proofs about them.
+
+Among his libraries for the locally nameless infrastructure, Arthur \cite{DBLP:journals/jar/Chargueraud12} built a generic model for environments, and later Emmanuel \cite{DBLP:journals/corr/abs-1112-1316} rewrote his generic environments model in Coq 8.3, publishing it as a standalone Coq library, named \texttt{generic-environments}\footnote{\url{https://github.com/coq-community/generic-environments}}.
+
+The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the man behind \texttt{coq-community}, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of the current thesis.
+
+Still, the implementation of \texttt{generic-environments} made use of Coq features that had breaking changes in the newer versions, hence a new simpler model was implemented.
+
+The newly implemented data structure is basically a list that supports exchange and a notion of membership, among others.
+
 From now on, we say \textit{generic store} or simply \textit{store}, when talking about the data model we implemented in Coq, and \textit{context} when we refer to its role in the type system. The store can be used for purposes other than a typing context.
 
 \begin{definition}
-The generic stores are denoted by $S$ in this chapter, which are unordered lists of keys $k$ and values $v$, defined inductively as follows:
+The generic stores are denoted by $S$ in this section, which are sequences of keys $k$ and values $v$, defined inductively as follows:
 \begin{equation*}
 S ::= \emptyset~|~S :: \angkv.
 \end{equation*}
 The empty store is denoted by $\emptyset$ and $::$ is the append operator.
 \end{definition}
 
-We would need decidablity of equality on the keys and values of the store. So, we assume the keys are chosen from a class $\mathbf{K}$ equipped with a reflexive relation $\asymp$ with the following property:
-\begin{itemize}
-    \item If $k_1 \asymp k_2$, then $k_1 = k_2$.
-\end{itemize}
-The axiom of extentionality is also required for the class of values, $\mathbf{V}$.
+A notion of equality is required for keys and values, as are essential for membership check later. One could rely on Coq's syntactical equality, but could also extend the notion of equality for more control on the keys and values. Hence, the classes $\mathbf{K}$ and $\mathbf{V}$, named \texttt{KeyModuleType} and \texttt{ValModuleType}, respectively, require a reflexive relation $\asymp$.
+
+This relation is specially essential for automated validation of the definitions with tools like QuickChick.
+
+% We would need decidablity of equality on the keys and values of the store. So, we assume the keys are chosen from a class $\mathbf{K}$ equipped with a reflexive relation $\asymp$ with the following property:
+% \begin{itemize}
+%     \item If $k_1 \asymp k_2$, then $k_1 = k_2$.
+% \end{itemize}
+% The axiom of extentionality is also required for the class of values, $\mathbf{V}$.
 
 % \begin{listing}[t]
 % \begin{minted}[
@@ -79,7 +93,7 @@ By definition, stores are lists of ordered pairs. Membership is defined recursiv
 The membership is defined so, so that appending a pair with the same key and a different value would overwrite the old record, in a sense:
 \begin{itemize}
     \item $\angkv \in \emptyset :: \angkv$,
-    \item $\angkv \not\in \emptyset :: \angkv :: \ang{k, v'}$.
+    \item $\angkv \not\in \emptyset :: \angkv :: \ang{k, v'}$ if $v \ne v'$.
 \end{itemize}
 
 \begin{definition}
@@ -120,7 +134,7 @@ Let $B$ and $C$ be stores. Then $B = C$ if $B \equiv C$.
 \end{axiom}
 
 \begin{corollary}
-Let $B$ and $C$ be stores. Then $B = C$ iff $B \equiv C$.
+Let $B$ and $C$ be stores. Then $B = C$ if and only if $B \equiv C$.
 \end{corollary}
 \begin{proof}
 Follows from reflexiveness of $\equiv$.
