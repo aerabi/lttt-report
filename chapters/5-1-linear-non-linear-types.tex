@@ -84,8 +84,62 @@ single.bind(console.log);  // nothing happens...
 single.exec(() => {});     // now, it prints to console
 \end{minted}
 
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\footnotesize,
+linenos,
+mathescape=true
+]{typescript}
+import { Single } from 'lttt';
+
+export class UserRepository {
+  constructor() {
+    // initialize the DB model
+  }
+  
+  public getUserById(id: string): Single<User> {
+    return Single.fromPromise(model.getById(id))
+      .bind(UserRepository.toBusinessModel);
+  }
+  
+  private static toBusinessModel(doc: UserDocument): User {
+    return { name: doc.name, id: doc._id };
+  }
+}
+\end{minted}
+\caption{The \texttt{Single} type in a action}
+\label{listing:user-repository}
+\end{listing}
+
+An example of the \texttt{Single} type being used in action is demonstrated in Listing \ref{listing:user-repository}. Database model returns a value of type \texttt{Promise<UserDocument>} which is cast into \texttt{Single<UserDocument>}. The method \texttt{fromPromise} transforms \texttt{UserDocument} into \texttt{Lin<UserDocument>} under the hood and wraps it in the \texttt{Single}.
+
+The \texttt{bind} method accepts regular functions of type \texttt{UserDocument}$~\rightarrow~$\texttt{User}. This is for convenience. A separate method \texttt{linearBind} could be added that accepts a functions of type
+\texttt{Lin<UserDocument>}$~\rightarrow~$\texttt{Lin<User>}, or better, functions of type \texttt{Lin<UserDocument>}$~\multimap~$\texttt{Lin<User>}.
+
+
 \section{Linear Embedded Language}
 One can describe the language of the embedded linear types as follows:
-\[
-\A ::= \mathtt{LUnit} \mid \mathtt{LZero} \mid \mbox{\texttt{LPair<}}\A, \A\mbox{\texttt{>}} \mid \mbox{\texttt{LFun<}}\A, \A\mbox{\texttt{>}} \mid \mbox{\texttt{Lin<}}\T\mbox{\texttt{>}} \mid \mbox{\texttt{Single<}}\A\mbox{\texttt{>}}.
-\]
+\begin{align*}
+\T &::= T \mid \cdots \mid \A \\
+\A &::= \mathtt{LUnit} \mid \mathtt{LZero} \mid \mbox{\texttt{LPair<}}\T, \T\mbox{\texttt{>}} \mid \mbox{\texttt{LFun<}}\T, \T\mbox{\texttt{>}} \mid \mbox{\texttt{Lin<}}\T\mbox{\texttt{>}} \mid \mbox{\texttt{Single<}}\T\mbox{\texttt{>}}.
+\end{align*}
+
+In the embedded type system, linear types are also considered ``regular'' types and are treated the same way. An additional type-checking and/or runtime guards are required to ensure their linearity. Also, for convenience, we embed linearity inside types such as \texttt{Single}, \texttt{LFun}, and \texttt{LPair}. In other words, 
+\begin{itemize}
+    \item \texttt{LZero} represents $0$ and is equal to \texttt{Lin<void>},
+    \item \texttt{LUnit} represents $1$ and is equal to \texttt{Lin<undefined>},
+    \item \texttt{LPair<}$\T_1, \T_2$\texttt{>} represents $(\floor{\T_1}, \floor{\T_2})$,
+    \item \texttt{LFun<}$\T_1, \T_2$\texttt{>} represents $\floor{\T_1} \multimap \floor{\T_2}$,
+    \item \texttt{Lin<}$\T$\texttt{>} represents $\floor{\T}$, and
+    \item \texttt{Single<}$\T$\texttt{>} represents $\diamond\floor{\T}$.
+\end{itemize}
+
+Linearity of \texttt{Lin} can be enforced in the runtime, simply by setting a flag or manually freeing up the memory it was allocating. The \texttt{LFun} and \texttt{LPair} can be realized as regular function and tuple types of TypeScript wrapped in a \texttt{Lin}, to ensure linearity of the result:
+\begin{minted}{typescript}
+export type LFun<T1, T2> = Lin<(_: T1) => T2>;
+export type LPair<T1, T2> = Lin<[T1, T2]>;
+\end{minted}
