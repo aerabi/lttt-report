@@ -35,7 +35,7 @@ Instead, we started proving different statements about the type system directly.
 
 \section{LTTT in TypeScript}
 
-The TypeScript implementation is published as an NPM package called \texttt{lttt}\footnote{\url{https://www.npmjs.com/package/lttt}}. The package exports the following types:
+The TypeScript implementation is published as an NPM package called \texttt{lttt}\footnote{\url{https://www.npmjs.com/package/lttt}}. The package exports the following types, among others:
 \begin{itemize}
     \item \texttt{Lin}. The linear type that become unavailable after first usage.
     \item \texttt{LPromise}. Analogous to \texttt{Promise<Lin<}$\T$\texttt{>{}>}, it's a type for values that become available eventually, and then can be used only once.

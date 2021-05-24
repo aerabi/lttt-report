@@ -39,4 +39,9 @@ Here, $\e$ and $\n$ are normalized versions of $\t$ and $\e$, respectively. A st
 If $\vdash \t : \T$ and $\t \leadsto \t'$ then $\vdash \t' : \T$. If $\vdash \e : \A$ and $\e \leadsto \e'$ then $\vdash \e' : \A$.
 \end{theorem}
 
-Theorem \ref{theorem:preservation} is stated in work of \cite{Paykin2016TheEO}. Stronger results are proved in the next chapter using Coq.
+Theorem \ref{theorem:preservation} is stated in work of \cite{Paykin2016TheEO}. Stronger results are proved in the next chapter using Coq. Another unproved theorem stated in work of Paykin is the following:
+
+\begin{theorem}[Progress]
+\label{theorem:progress}
+If $\vdash \t : \T$ then either $\t$ is a value or $\t$ can take a step. If $\vdash \e : \A$ then either $\e$ is in weak head normal form or $\e$ can take a step.
+\end{theorem}

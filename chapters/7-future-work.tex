@@ -28,4 +28,49 @@ Still, one can access the type data in the compile time. The type system can the
 
 \section{Generalize Preservation for Linear Types}
 
-The preservation lemmas for $\t$ and $\e$ are introduced and proved in Coq. Although the $\t$-Preservation (Lemma \ref{lemma:t-preservation}) has full power, the $\e$-Preservation (Lemma \ref{lemma:e-preservation-weak}) was stated and proved in a weak version, assuming linear context to be empty. A stronger result can be achieved by generalizing the lemma for non-empty linear context.
+The preservation lemmas for $\t$ and $\e$ are introduced and proved in Coq. Although the $\t$-Preservation (Lemma \ref{lemma:t-preservation}) has full power, the $\e$-Preservation (Lemma \ref{lemma:e-preservation-weak}) was stated and proved in a weaker version, assuming linear context to be empty. A stronger result can be achieved by generalizing the lemma for non-empty linear context.
+
+\section{Proof Progress}
+
+The progress result (Theorem \ref{theorem:progress}) is stated in work of \cite{Paykin2016TheEO} without any proof. If a concise definition of what terms are called \textit{values} and what expressions are in weak head normal form, one can state the progress lemmas in Coq and try to prove them.
+
+\section{Untangle the Mutual Inductive Definitions in Coq}
+
+\begin{listing}[t]
+\begin{minted}[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+fontsize=\small,
+linenos,
+escapeinside=<>,
+mathescape=true
+]{coq}
+Inductive <$\mathfrak{Q}$> : Type := Lin | Un.
+
+Reserved Notation <$\T$>.
+Reserved Notation <$\A$>.
+
+Inductive <$\T$><$\A$> : <$\mathfrak{Q}$> -> Type :=
+  | Unit : <$\T$>
+  | Void : <$\T$>
+  | <$\T$>mult : <$\T$> -> <$\T$> -> <$\T$>
+  | <$\T$>plus : <$\T$> -> <$\T$> -> <$\T$>
+  | <$\T$>impl : <$\T$> -> <$\T$> -> <$\T$>
+  | <$\T$>ceil : <$\A$> -> <$\T$>
+  | <$\A$>1 : <$\A$>
+  | <$\A$>0 : <$\A$>
+  | <$\A$>mult : <$\A$> -> <$\A$> -> <$\A$>
+  | <$\A$>plus : <$\A$> -> <$\A$> -> <$\A$>
+  | <$\A$>impl : <$\A$> -> <$\A$> -> <$\A$>
+  | <$\A$>flor : <$\T$> -> <$\A$>
+  | <$\A$>diam : <$\A$> -> <$\A$>
+
+where <$\T$> := (<$\T$><$\A$> Lin)
+and <$\A$> := (<$\T$><$\A$> Un).
+\end{minted}
+\caption{Untangling mutual inductions by introducing $\mathfrak{Q}$}
+\label{listing:coq-untangled-base}
+\end{listing}
+
+One reason using QuickChick for checking soundness of definitions in Coq failed, was the use of mutual induction for introducing basic types: $\t$ was definied together with $\e$, $\T$ was defined together with $\A$, and so on. One could try to define these types with simple inductions, using encoding (similar to what \cite{DavidWalker2004} did). It will make proofs a bit more verbose, but will make the types checkable for QuickChick (see Listing \ref{listing:coq-untangled-base}).
