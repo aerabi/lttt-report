@@ -1,8 +1,42 @@
 \section{Operational Semantics}
 
+\newcommand{\dbrack}[1]{\left\llbracket #1 \right\rrbracket}
+
 \begin{figure}
     \centering
     \input{figures/formulae/semantics}
-    \caption{Operational Semantics}
-    \label{fig:operational-semantics}
+    \caption{Operational Semantics Step Relation}
+    \label{fig:operational-semantics-step}
 \end{figure}
+
+In order to approach the semantics, a normalized version of the terms and expression is defined:
+\begin{align*}
+    \v ::=&~ () \mid (\v_1, \v_2) \mid \mathtt{in}_i \v \mid \lambda x. \t \mid \mathtt{suspend}~\e \\
+    \n ::=&~ () \mid (\e_1, \e_2) \mid \mathtt{in}_i \e \mid \lambda x. \e \mid \mathtt{return}~\e \mid \floor{\v}
+\end{align*}
+Here, $\e$ and $\n$ are normalized versions of $\t$ and $\e$, respectively. A step relation $\leadsto$ is defined on $\t \cup \e$ in \figref{fig:operational-semantics-step}. Using the step relation, a full operational semantics using context hole is defined in Figures \ref{fig:small-step-operational-semantics} and \ref{fig:operational-semantics-rules}.
+
+\begin{figure}
+    \centering
+    \input{figures/formulae/semantics-context}
+    \caption{Operational Semantics Evaluation Context}
+    \label{fig:small-step-operational-semantics}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \[
+    \infer{\mathfrak{E}_\t \dbrack{\t} \leadsto \mathfrak{E}_\t \dbrack{\t'}}{\t \leadsto \t'}
+    ~~~~ ~~~~
+    \infer{\mathfrak{E}_\e \dbrack{\e} \leadsto \mathfrak{E}_\e \dbrack{\e'}}{\e \leadsto \e'}
+    \]
+    \caption{Operational Semantics Reduction Rules}
+    \label{fig:operational-semantics-rules}
+\end{figure}
+
+\begin{theorem}[Preservation]
+\label{theorem:preservation}
+If $\vdash \t : \T$ and $\t \leadsto \t'$ then $\vdash \t' : \T$. If $\vdash \e : \A$ and $\e \leadsto \e'$ then $\vdash \e' : \A$.
+\end{theorem}
+
+Theorem \ref{theorem:preservation} is stated in work of \cite{Paykin2016TheEO}. Stronger results are proved in the next chapter using Coq.

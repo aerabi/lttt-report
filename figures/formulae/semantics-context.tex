@@ -1,0 +1,8 @@
+\begin{align*}
+    \mathfrak{E}_{\t} ::=&~ ([~], \t) \mid (\v, [~]) \mid \pi_i [~] \mid \mathtt{in}_i [~] \\
+    & \mid \mathtt{case}~[~]~\mathtt{of}~(\mathtt{in}_1 x_1 \rightarrow \t_1 \mid \mathtt{in}_2 x_2 \rightarrow \t_2) \\
+    & \mid [~] \t \mid \v [~] \mid \mathtt{force}~[~] \mid \floor{[~]} \\
+    \mathfrak{E}_\e ::=&~ \mathtt{let}~() = [~]~\mathtt{in}~\e \mid \mathtt{let}~(x_1, x_2) = [~]~\mathtt{in}~\e \\
+    & \mid \mathtt{case}~[~]~\mathtt{of}~(\mathtt{in}_1 x_1 \rightarrow \e_1 \mid \mathtt{in}_2 x_2 \rightarrow \e_2) \\
+    & \mid [~] \e \mid \mathtt{bind}~x = [~]~\mathtt{in}~\e \mid \mathtt{let}~\floor{x} = [~]~\mathtt{in}~\e
+\end{align*}
