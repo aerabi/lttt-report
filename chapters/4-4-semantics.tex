@@ -7,7 +7,7 @@ The operational semantics implementation is based on \figref{fig:operational-sem
 For all $\Gamma, \t, \t', \T$, if $\Gamma \vdash \t : \T$ and $\t \leadsto \t'$, then $\Gamma \vdash \t' : \T$.
 \end{lemma}
 
-The proofs to this lemma requires a simple rule on typing substitutions:
+To prove this lemma we require a rule on typing substitutions:
 \[
 \infer[\mbox{$\t$-Subst}]{\Gamma \vdash \t[x \mapsto \t'] : \T}{
     \Gamma, x : \T' \vdash \t : \T

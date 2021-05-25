@@ -7,7 +7,7 @@ Typing contexts lie at the core of type inference relations, storing all the hyp
 
 Among his libraries for the locally nameless infrastructure, Arthur \cite{DBLP:journals/jar/Chargueraud12} built a generic model for environments, and later Emmanuel \cite{DBLP:journals/corr/abs-1112-1316} rewrote his generic environments model in Coq 8.3, publishing it as a standalone Coq library, named \texttt{generic-environments}\footnote{\url{https://github.com/coq-community/generic-environments}}.
 
-The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the man behind \texttt{coq-community}, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of the current thesis.
+The initial problem with \texttt{generic-environments} was incompatibility with newer versions of Coq. After discussions with the library's author and Th\'eo Zimmermann, the man behind \texttt{coq-community}, the library was moved to \texttt{coq-community} and then published for the newer versions of Coq by the author of the current dissertation.
 
 Still, the implementation of \texttt{generic-environments} made use of Coq features that had breaking changes in the newer versions, hence a new simpler model was implemented.
 
@@ -25,7 +25,7 @@ The empty store is denoted by $\emptyset$ and $::$ is the append operator.
 
 A notion of equality is required for keys and values, as are essential for membership check later. One could rely on Coq's syntactical equality, but could also extend the notion of equality for more control on the keys and values. Hence, the classes $\mathbf{K}$ and $\mathbf{V}$, named \texttt{KeyModuleType} and \texttt{ValModuleType}, respectively, require a reflexive relation $\asymp$.
 
-This relation is specially essential for automated validation of the definitions with tools like QuickChick.
+This relation is especially essential for automated validation of the definitions with tools like QuickChick.
 
 % We would need decidablity of equality on the keys and values of the store. So, we assume the keys are chosen from a class $\mathbf{K}$ equipped with a reflexive relation $\asymp$ with the following property:
 % \begin{itemize}

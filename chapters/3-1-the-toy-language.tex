@@ -1,8 +1,8 @@
 \section{Event-Based Toy Language and Types}
 
-Throughout this chapter, a toy language together with a type system is used to discuss using temporal logic in event-driven programming. The type system is presented in the work of \cite{Paykin2016TheEO}. The types are based on the linear/non-linear logic of \cite{DBLP:conf/csl/Benton94} with an addition of $\diamond$ modality based on linear-time temporal logic of \cite{DBLP:conf/focs/Pnueli77}.
+Throughout this chapter, a toy language and a type system are used to discuss temporal logic usage in event-driven programming. The type system is presented in the work of \cite{Paykin2016TheEO}. The types are based on the linear/non-linear logic of \cite{DBLP:conf/csl/Benton94} with an addition of $\diamond$ modality based on linear-time temporal logic of \cite{DBLP:conf/focs/Pnueli77}.
 
-The language and its type are defined in \figref{fig:syntax-of-types-terms-expressions}. Non-linear types are designated with $\T$ and linear types are designated with $\A$. Terms, denoted by $\t$, form the non-linear fragment of the language. On the other hand, expressions, denoted by $\e$, form the linear fragment.
+The language and its types are defined in \figref{fig:syntax-of-types-terms-expressions}. Non-linear types are designated with $\T$ and linear types are designated with $\A$. Terms, denoted by $\t$, form the non-linear fragment of the language. On the other hand, expressions, denoted by $\e$, form the linear fragment.
 
 \begin{figure}
     \centering
@@ -14,14 +14,14 @@ The language and its type are defined in \figref{fig:syntax-of-types-terms-expre
 \begin{figure}
     \centering
     \include{figures/formulae/typing-rules-for-linear-types}
-    \caption{Typing rules of the linear types}
+    \caption{Typing rules of the non-linear types}
     \label{fig:typing-rules-for-nonlinear-types}
 \end{figure}
 
 \begin{figure}
     \centering
     \include{figures/formulae/typing-rules-for-nonlinear-types}
-    \caption{Typing rules of the non-linear types}
+    \caption{Typing rules of the linear types}
     \label{fig:typing-rules-for-linear-types}
 \end{figure}
 
@@ -35,10 +35,10 @@ The language and its type are defined in \figref{fig:syntax-of-types-terms-expre
 \begin{itemize}
     \item $\mathtt{Void}$ (resp. $0$) represents a type that is inhabited by no term (resp. expression).
     \item $\mathtt{Unit}$ (resp. $1$) represents a type that is inhabited by exactly one term (resp. expression), namely $()$ (resp. $()$). We won't differentiate the term $()$ and the expression $()$ in notation, as it should be apparent from the context which one we are talking about.
-    \item The multiplicative connectives $\times$ and $\otimes$ represent type of pairs, in the non-linear and linear domains, respectively.
+    \item The multiplicative connectives $\times$ and $\otimes$ represent the type of pairs, in the non-linear and linear domains, respectively.
     \item The additive connectives $+$ and $\oplus$ are used for branching.
     \item The connectives $\rightarrow$ and $\multimap$ represent the type of functions.
-    \item The modality $\diamond$ represent the type of a variable that will eventually become available.
+    \item The modality $\diamond$ represents the type of a variable that will eventually become available.
 \end{itemize}
 
 \begin{definition}
@@ -48,5 +48,5 @@ Two sequent relations are introduced as follows:
     \item The non-linear sequent $\Gamma \vdash \t : \T$ which is defined through \figref{fig:typing-rules-for-nonlinear-types},
     \item The relation between the two sequents are given by \figref{fig:typing-rules-for-linear-and-nonlinear-types}.
 \end{itemize}
-Here, $\Gamma$ denotes the unrestricted typing context, and $\Delta$ the linear context. The non-linear sequent has access only to the unrestricted context, although the linear sequent has access to both.
+Here, $\Gamma$ denotes the unrestricted typing context and $\Delta$ the linear context. The non-linear sequent has access only to the unrestricted context, although the linear sequent has access to both.
 \end{definition}
