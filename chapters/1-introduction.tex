@@ -1,6 +1,8 @@
 \chapter{Introduction}\label{chap:introduction}
 
-\section{Problem Definition}
+In this work, we implemented the linear-time temporal type theory, LTTT, in Coq. LTTT is first introdcued by \cite{Paykin2016TheEO} to lay a basis to study event-driven programming. Particularly, we implemented typing rules and an operational semantics, and proved some results about them (among them some stronger linear and non-linear preservation results) mechanically in Coq. We implemented a generic store in Coq that is used as the linear and non-linear context for the typing relations. Some 45 lemmas and propositions are proved about the store to make it more practical. And finally, we implemented an embedded version of LTTT in TypeScript to show the theory in action. The TypeScript implementation tries to embed linearity into the non-linear type system of TS and create a controlled version of RxJS's observable.
+
+\section{Motivation}
 
 Event-driven programming is becoming the standard paradigm for programming in almost every domain: backend, frontend, GUI, etc. All of the framework and library vendors are now offering \textit{reactive}, \textit{i.e.} event-driven interfaces for their products. Spring framework came up with WebFlux, Angular is all wrapped in RxJS's observables, and Node.js is async by nature. Reactive drivers are being implemented for databases, to support an end-to-end reactive spectrum.
 
