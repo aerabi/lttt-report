@@ -1,6 +1,6 @@
 \section{Structural Rules}
 
-In natural deduction, \textit{structural rules} are inference rules that do not refer to any logical connective, but instead operates on the sequents directly.
+In natural deduction, \textit{structural rules} are inference rules that do not refer to any logical connective, but instead operate on the sequents directly.
 
 Three common structural rules are:
 \begin{itemize}
@@ -10,13 +10,13 @@ Three common structural rules are:
         ~~~~ ~~~~
         \infer=[\mbox{Weak}]{\Gamma_1, x : \A, \Gamma_2\vdash \t : \mathfrak{B}}{\Gamma_1, \Gamma_2\vdash \t : \mathfrak{B}}
     \end{gather*}
-    \item \textbf{Contraction}. Which states that two similar (or unifiable) hypothesis can be replaced by a single hypothesis.
+    \item \textbf{Contraction}. Which states that two similar (or unifiable) hypotheses can be replaced by a single hypothesis.
     \begin{gather*}
         \infer=[\mbox{Contr}]{\Gamma_1, \alpha, \Gamma_2 \vdash \beta}{\Gamma_1, \alpha, \alpha, \Gamma_2 \vdash \beta}
         ~~~~ ~~~~
         \infer=[\mbox{Contr}]{\Gamma_1, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}{\Gamma_1, x : \A, x : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
-    Another version of the weakening rule is proposed by \cite{DavidWalker2004} for type systems:
+    Another version of the contraction rule is proposed by \cite{DavidWalker2004} for type systems:
     \begin{gather*}
         \infer=[\mbox{Contr}]{\Gamma_1, x_1 : \A, \Gamma_2 \vdash \t[x_2 \mapsto x_1, x_3 \mapsto x_1] : \mathfrak{B}}{\Gamma_1, x_2 : \A, x_3 : \A, \Gamma_2 \vdash \t : \mathfrak{B}}
     \end{gather*}
@@ -62,9 +62,9 @@ To understand how the structural rules for the type systems affect programming l
     \label{fig:intuitionistic-logic-natural-deduction-contraction}
 \end{figure}
 
-Depending on the structural rules one assumes, the inference rules may differ. Usually, contraction is assumed for the intuitionistic logic, so the inference rules are represented as in \figref{fig:intuitionistic-logic-natural-deduction-contraction}.
+Depending on the structural rules one assumes, the inference rules may differ. Usually, contraction and exchange are assumed for the intuitionistic logic, so the inference rules are represented as in \figref{fig:intuitionistic-logic-natural-deduction-contraction}.
 
-For example, using the $\rightarrow$-E rule from \figref{fig:intuitionistic-logic-natural-deduction}, there is a contraction happening under the hood:
+For example, using the $\rightarrow$-E rule from \figref{fig:intuitionistic-logic-natural-deduction} and unifying $\Gamma_1$ and $\Gamma_2$ (showing it as $\Gamma$), two copies of $\Gamma$ will appear in the conclusion, which are transformed into one by contraction and exchange:
 \[
 \infer={\Gamma \vdash \beta}{
     \infer[\mbox{$\rightarrow$-E}]{\Gamma, \Gamma \vdash \beta}{

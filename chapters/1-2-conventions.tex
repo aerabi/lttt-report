@@ -1,17 +1,15 @@
 \section{Audience}
 
-This dissertation can be read by undergraduate students of Computer Science and Mathematics.
+This dissertation can be read by undergraduate students of computer science and mathematics.
 Prior familiarity with logic and type systems is helpful but not required. \chapref{chap:background} tries to define everything required to understand the LTTT's formulation later given in \chapref{chapter:the-type-system}. For more background in the logic used in the current work, we refer the reader to the book of \cite{ben-ari2012book} and its chapter on linear-time temporal logic, \cite{Ben-Ari2012}. For more background in type systems, we refer the reader to the book of \cite{10.5555/1076265} and especially its first chapter by \cite{DavidWalker2004} on linear type systems.
 For more background in the theoretical part, work of \cite{DBLP:journals/tcs/Girard87} on linear logic is suggested.
 The Backus--Naur form (BNF) is used extensively to define formal languages (see \cite{DBLP:conf/ifip/Backus59}).
 
-\chapref{chap:coq-implementation} discusses a Coq implementation of the theory, so familiarity with the syntax of Coq is helpful. Similarly, familiarity with syntax of TypeScript is helpful for \chapref{chap:typescript-implementation}.
-
-To describe the future types, we make examples from the ReactiveX\footnote{\url{http://reactivex.io/}} and especially RxJS\footnote{\url{https://github.com/ReactiveX/rxjs}}, as well as Promise/A specification (\cite{zyp_2010}) and its implementation in JavaScript (\cite{bershanskiy_mills_willee_ribaric_2020}).
+To describe the future types, we draw examples from ReactiveX\footnote{\url{http://reactivex.io/}} and especially RxJS\footnote{\url{https://github.com/ReactiveX/rxjs}}, as well as Promise/A specification (\cite{zyp_2010}) and its implementation in JavaScript (\cite{bershanskiy_mills_willee_ribaric_2020}).
 
 \section{Conventions}
 
-Throughout the thesis, small Greek letters are used as metavariables in the logics: $\alpha, \beta, \varphi, \psi$. In the type systems, Fraktur letters are used instead: small letters for terms and expressions in the language being typed, e.g. $\t, \e$, and capital letters for the types: $\mathfrak{A}, \mathfrak{B}, \T$. One reason for this separation is because some small Greek letters have meanings in standard formulation of programming languages and so are used in the toy languages: $\lambda$ for the lambda expression, $\iota$ for injection, and $\pi$ for projection. Furthermore, most capital Greek letters are indistinguishable from their Latin descendants, e.g. $A, B, T$. The use of Fraktur letters for logical expressions is inspired by \cite{hilbert1928}.
+Throughout this dissertation, small Greek letters are used as metavariables in the logics: $\alpha, \beta, \varphi, \psi$. In the type systems, Fraktur letters are used instead: small letters for terms and expressions in the language being typed, e.g. $\t, \e$, and capital letters for the types: $\mathfrak{A}, \mathfrak{B}, \T$. One reason for this separation is because some small Greek letters have meanings in standard formulation of programming languages and therefore are used in the toy languages: $\lambda$ for the lambda expression, $\iota$ for injection, and $\pi$ for projection. Furthermore, most capital Greek letters are indistinguishable from their Latin descendants, e.g. $A, B, T$. The use of Fraktur letters for logical expressions is inspired by \cite{hilbert1928}.
 In \chapref{chap:coq-implementation}, the Fraktur letters represent types in the metalanguage (in this case Coq):
 
 \begin{minted}[escapeinside=<>,mathescape=true]{coq}

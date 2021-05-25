@@ -2,10 +2,10 @@
 
 The language of simply typed lambda calculus $\lambda(\rightarrow)$ is defined by the following grammar:
 \begin{align*}
-    &\T ::= T \mid \T \rightarrow \T \\
-    &\t ::= x \mid \lambda x. \t \mid \t_1 \t_2
+    &\T ::= T \mid \T \rightarrow \T, \\
+    &\t ::= x \mid \lambda x. \t \mid \t_1 \t_2,
 \end{align*}
-Here, $T$ designates constant types (take $\mathtt{Boolean} \mid \mathtt{String}$ for example) and $x$ designates variables. The $\t$'s are called \textit{terms} and the $\T$'s are called \textit{types}.
+where $T$ designates constant types (take $\mathtt{Boolean} \mid \mathtt{String}$ as example) and $x$ designates variables. The $\t$'s are called \textit{terms} and the $\T$'s are called \textit{types}.
 
 \subsection{Sequent and Natural Deduction}
 
